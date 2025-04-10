@@ -1,0 +1,44 @@
+﻿@using System.Collections.ObjectModel
+@using CRM_SAAS.Models
+<div class="flex h-screen bg-gray-100">
+    <aside class="hidden md:flex flex-col w-64 bg-gray-800">
+        <div class="flex items-center justify-center h-16 bg-gray-800">
+            <span class="text-white font-bold uppercase">Sidebar</span>
+        </div>
+        <div class="flex flex-col flex-1 overflow-y-auto">
+            <nav class="flex-1 px-2 py-4 bg-gray-800">
+                @foreach (var menu in MenuOptions)
+                {
+                    <a href="@menu.Path" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+                        @menu.Name
+                    </a>
+                }
+            </nav>
+        </div>
+    </aside>
+
+    <div class="flex flex-col flex-1 overflow-y-auto">
+        <nav class="flex items-center justify-end h-16 bg-white">
+            <p class="mr-6 text-dark">About</p>
+        </nav>
+        <div class="p-4">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public required RenderFragment ChildContent { get; set; }
+
+    private static readonly ICollection<MenuOptions> MenuOptions = new Collection<MenuOptions>()
+    {
+        new () {Name = "Dashboard", Path = "/Dashboard"},
+        new () {Name = "Clientes", Path = "/Clients"},
+        new () {Name = "Kanban", Path = "/Kanban"},
+        new () {Name = "Chat", Path = "/Chat"},
+        new () {Name = "Equipe", Path = "/Users"},
+        new () {Name = "Configurações", Path = "/Settings"},
+    };
+
+}

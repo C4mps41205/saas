@@ -1,0 +1,85 @@
+﻿@using System.Dynamic
+@using CRM_SAAS.Models
+
+@code {
+    [Parameter] public required ICollection<GridCells> GridCells { get; set; }
+    [Parameter] public required IEnumerable<ExpandoObject> Data { get; set; }
+    [Parameter] public required string Title { get; set; }
+    [Parameter] public bool IsLoading { get; set; } = true;
+}
+
+<div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-semibold">@Title</h2>
+    <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Add @Title</button>
+</div>
+
+<div class="bg-white rounded-md p-4 overflow-x-auto">
+    @if (IsLoading)
+    {
+        <table class="min-w-full text-sm text-gray-700 animate-pulse">
+            <thead>
+            <tr class="text-left border-b">
+                @foreach (var col in GridCells)
+                {
+                    <th class="p-2">@col.Collumn</th>
+                }
+            </tr>
+            </thead>
+            <tbody>
+            @for (int i = 0; i < 5; i++)
+            {
+                <tr class="border-b">
+                    @foreach (var cell in GridCells)
+                    {
+                        <td class="p-2">
+                            <div class="h-4 bg-gray-200 rounded w-full"></div>
+                        </td>
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <table class="min-w-full text-sm text-gray-700">
+            <thead>
+            <tr class="text-left border-b">
+                @foreach (var col in GridCells)
+                {
+                    <th class="p-2">@col.Collumn</th>
+                }
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (ExpandoObject row in Data)
+            {
+                var rowDict = (IDictionary<string, object>)row;
+                <tr class="border-b hover:bg-gray-50">
+                    @foreach (var cell in GridCells)
+                    {
+                        <td class="p-2">
+                            @if (rowDict.TryGetValue(cell.Collumn, out var value))
+                            {
+                                @value
+                            }
+                            else
+                            {
+                                <span class="text-gray-400 italic">N/A</span>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        <div class="flex items-center justify-between mt-4">
+            <p class="text-sm text-gray-500">Showing 1 to 10 of 13 entries</p>
+            <div class="flex space-x-1">
+                <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded">1</button>
+                <button class="px-3 py-1 bg-gray-200 text-sm rounded">2</button>
+            </div>
+        </div>
+    }
+</div>

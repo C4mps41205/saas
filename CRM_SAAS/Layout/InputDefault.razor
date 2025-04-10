@@ -1,0 +1,59 @@
+﻿@* <InputDefault *@
+@*     Id="teste" *@
+@*     Label="teste" *@
+@*     Placeholder="teste..." *@
+@*     Name="teste" *@
+@*     Type="Text" *@
+@*     ValueInput="teste" *@
+@*     ValueChangedCallback="@(s => teste = s)" *@
+@* /> *@
+
+<label for="@Name" class="block text-sm font-medium leading-5 text-gray-700">@Label</label>
+<div class="mt-1 relative rounded-md shadow-sm">
+    <input
+        id="@Id"
+        name="@Name"
+        value="@ValueInput"
+        @oninput="HandleInput"
+        placeholder="@Placeholder"
+        type="@Type"
+        required="@Required"
+        class="appearance-none
+         block
+         w-full
+         px-3
+         py-2
+         border
+         border-gray-300
+         rounded-md
+         placeholder-gray-400
+         focus:outline-none
+         focus:shadow-outline-blue
+         focus:border-blue-300
+         transition
+         duration-150
+         ease-in-out
+         sm:text-sm
+         sm:leading-5"/>
+</div>
+
+@code {
+    [Parameter] public required string Id { get; set; }
+    [Parameter] public required string Label { get; set; }
+    [Parameter] public string Placeholder { get; set; } = null!;
+    [Parameter] public bool Required { get; set; } = false;
+    [Parameter] public required string Name { get; set; }
+    [Parameter] public string Type { get; set; } = "text";
+    [Parameter] public string ValueInput { get; set; } = string.Empty;
+    [Parameter] public EventCallback<string> ValueChangedCallback { get; set; }
+    
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        string newValue = e.Value?.ToString() ?? string.Empty;
+        if (ValueInput != newValue)
+        {
+            ValueInput = newValue;
+            await ValueChangedCallback.InvokeAsync(ValueInput);
+        }
+    }
+}
