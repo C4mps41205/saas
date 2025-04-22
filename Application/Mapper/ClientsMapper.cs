@@ -14,6 +14,21 @@ public class ClientsMapper : IBaseMappper<GetClientResponse, Client, GetClientRe
 
     public GetClientResponse ToDto(Client input)
     {
-        throw new NotImplementedException();
+        return new(
+            input.Id,
+            input.Phone,
+            input.Name,
+            input.CpfCnpj,
+            input.PersonType,
+            input.Email,
+            input.BirthDate,
+            input.State,
+            input.City,
+            input.Cep,
+            input.Number,
+            input.Neighborhood,
+            input.Complement,
+            input.Subordinates.Select(ToDto).ToList()
+        );
     }
 }

@@ -3,23 +3,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext(builder.Configuration);
 builder.Services.AddSignalRDependency();
-var app = builder.Build();
-app.MapSignalR();
-
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.UseCors(x =>
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
     {
-        x.AllowAnyHeader();
-        x.AllowAnyMethod();
-        x.AllowAnyOrigin();
-    });
-}
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });;
+builder.Services.AddDependencyInjection();
 
+var app = builder.Build();
+
+app.MapSignalR();
+app.MapOpenApi();
+app.AddCorsServices();
+app.MapControllers();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
-app.MapControllers();
 
 app.Run();

@@ -3,21 +3,24 @@ using Application.Dto.Request;
 using Application.Dto.Response;
 using Application.Mapper;
 using Application.Repository;
-using CRM_SAAS.Pages;
 using Domain.Entitites;
 using Infra.Data.DbContext;
+using Infrastructure.Hubs;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infrastructure.Adapthers;
 
-public class ClientAdapher(AppDbContext appDbContext) : IClientsRepository
+public class ClientAdapher(AppDbContext appDbContext, IHubContext<ClientHub> hubContext) : IClientsRepository
 {
-    public PaginationDefault<GetClientResponse> GetPaginatedClients(GetClientRequest pagination)
+    #region --Queries
+
+    public Task<PaginationDefault<GetClientResponse>> GetPaginatedClients(GetClientRequest pagination)
     {
         int totalCount = appDbContext.Clients.Count();
         int totalPages = (int)Math.Ceiling((double)totalCount / pagination.PageSize);
-        
-        return new PaginationDefault<GetClientResponse>
+
+        return Task.FromResult(new PaginationDefault<GetClientResponse>
         {
             Page = pagination.Page,
             PageSize = pagination.PageSize,
@@ -29,25 +32,71 @@ public class ClientAdapher(AppDbContext appDbContext) : IClientsRepository
                 .Take(pagination.PageSize)
                 .Select(u => new ClientsMapper().ToDto(u))
                 .ToList()
-        };
+        });
     }
 
-    public CreateClientResponse CreateCategory(CreateClientRequest createClientRequest)
+    public GetClientResponse GetClientById(GetClientByIdRequest getClientByIdRequest)
     {
-        Client newClient = new CreateClientMapper().ToEntity(createClientRequest);
+        Client? client = appDbContext.Clients.Find(getClientByIdRequest.Id);
+        
+        if(client == null)
+            throw new ApplicationException("Client not found");
+
+        return new ClientsMapper().ToDto(client);
+    }
+
+    #endregion
+
+    #region --Actions
+
+    public CreateClientResponse CreateClient(ClientRequest clientRequest)
+    {
+        Client newClient = new CreateClientMapper().ToEntity(clientRequest);
         EntityEntry<Client> createdCategory = appDbContext.Clients.Add(newClient);
         appDbContext.SaveChanges();
 
-        return new CreateClientMapper().ToDto(createdCategory.Entity);
+        var dto = new CreateClientMapper().ToDto(createdCategory.Entity);
+        hubContext.Clients.All.SendAsync("ClientCreated", dto);
+        return dto;
     }
 
-    public UpdateClientResponse UpdateCategory(UpdateClientRequest categoryDto, Guid id)
+    public bool UpdateClient(ClientRequest clientDto, Guid id)
     {
-        throw new NotImplementedException();
+        var client = appDbContext.Clients.Find(id);
+
+        client.Phone = clientDto.Phone;
+        client.Name = clientDto.Name;
+        client.CpfCnpj = clientDto.CpfCnpj;
+        client.PersonType = clientDto.PersonType;
+        client.Email = clientDto.Email;
+        client.BirthDate = clientDto.BirthDate;
+        client.State = clientDto.State;
+        client.City = clientDto.City;
+        client.Cep = clientDto.Cep;
+        client.Number = clientDto.Number;
+        client.Neighborhood = clientDto.Neighborhood;
+        client.Complement = clientDto.Complement;
+        client.Subordinates = [];
+
+        appDbContext.SaveChanges();
+        
+        hubContext.Clients.All.SendAsync("ClientUpdated", new CreateClientMapper().ToDto(client));
+        return true;
     }
 
-    public bool DeleteCategory(Guid id)
+    public bool DeleteClient(Guid id)
     {
-        throw new NotImplementedException();
+        Client? client = appDbContext.Clients.Find(id);
+        
+        if(client == null)
+            throw new ApplicationException("Client not found");
+        
+        appDbContext.Clients.Remove(client);
+        appDbContext.SaveChanges();
+        
+        hubContext.Clients.All.SendAsync("ClientDeleted", id);
+        return true;
     }
+
+    #endregion
 }

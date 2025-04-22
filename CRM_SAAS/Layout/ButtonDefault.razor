@@ -1,0 +1,26 @@
+﻿@code {
+    [Parameter] public required string Id { get; set; }
+    [Parameter] public required string Label { get; set; }
+    [Parameter] public required string Name { get; set; }
+    [Parameter] public EventCallback<bool> ValueChangedCallback { get; set; }
+
+    private async Task SendAddButtonCallback()
+    {
+        await ValueChangedCallback.InvokeAsync(true);
+    }
+}
+
+<button
+    id="@Id"
+    name="@Name"
+    type="button"
+    class="bg-blue-600
+        text-white
+        px-4
+        py-2
+        rounded
+        hover:bg-blue-700"
+    @onclick="SendAddButtonCallback"
+    >
+    @Label
+</button>

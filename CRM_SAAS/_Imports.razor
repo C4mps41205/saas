@@ -8,3 +8,11 @@
 @using Microsoft.JSInterop
 @using CRM_SAAS
 @using CRM_SAAS.Layout
+@using CRM_SAAS.Services
+@using CRM_SAAS.Services.Repository
+
+@inject IClientsRepository _ClientsRepository
+@inject IEmployeeRepository _EmployeeRepository
+
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRunTime

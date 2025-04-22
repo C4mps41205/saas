@@ -1,6 +1,19 @@
-﻿namespace Application.Dto.Request;
+﻿using Domain.Enum;
 
-public class CreateClientResponse
-{
-    
-}
+namespace Application.Dto.Request;
+
+public record CreateClientResponse(
+    string Phone,
+    string Name,
+    string CpfCnpj,
+    PersonType PersonType,
+    string Email,
+    DateTime BirthDate,
+    State? State,
+    string? City,
+    string? Cep,
+    int? Number,
+    string? Neighborhood,
+    string? Complement,
+    List<CreateClientResponse> Subordinates 
+        );

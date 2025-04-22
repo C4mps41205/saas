@@ -1,37 +1,132 @@
 ﻿@page "/Clients"
 @using System.Dynamic
+@using Application.Dto
+@using Application.Dto.Response
 @using CRM_SAAS.Models
 
 @code {
-    List<GridCells> columns = new()
-    {
-        new GridCells { Collumn = "Nome" },
-        new GridCells { Collumn = "Email" },
-        new GridCells { Collumn = "País" },
-    };
 
-    List<ExpandoObject> rows = new();
+    #region --Variables
+
+    List<GridCells> _columns;
+    List<ExpandoObject> _rows = new();
     public bool IsLoading { get; set; } = true;
+    public int Page { get; set; }
+    public int PageSize { get; set; }
+    public int TotalPages { get; set; }
 
-    protected override void OnInitialized()
+    #endregion
+
+    #region --Base
+
+    protected override async Task OnInitializedAsync()
     {
-        dynamic user1 = new ExpandoObject();
-        user1.Nome = "João da Silva";
-        user1.Email = "joao@email.com";
-        user1.País = "Brasil";
+        _columns = new List<GridCells>
+        {
+            new() { Collumn = "Phone" },
+            new() { Collumn = "Name" },
+            new() { Collumn = "CpfCnpj" },
+            new() { Collumn = "PersonType" },
+            new() { Collumn = "Email" },
+            new() { Collumn = "BirthDate" },
+            new() { Collumn = "State" },
+            new() { Collumn = "City" },
+            new() { Collumn = "Cep" },
+            new() { Collumn = "Number" },
+            new() { Collumn = "Neighborhood" },
+            new() { Collumn = "Complement" },
+            new()
+            {
+                Collumn = "Actions",
+                Render = row =>
+                    @<ButtonDefault
+                        Id="Edit"
+                        Label="Edit"
+                        Name="Edit"
+                        ValueChangedCallback="r => ButtonClickedCallbackEdit(row)"
+                    />
+            }
+        };
 
-        dynamic user2 = new ExpandoObject();
-        user2.Nome = "Maria Souza";
-        user2.Email = "maria@email.com";
-        user2.País = "Portugal";
+        _ClientsRepository.OnClientsCreated += async (_) =>
+        {
+            await GetAllClients();
+            StateHasChanged();
+        };
 
-        rows.Add(user1);
-        rows.Add(user2);
+        _ClientsRepository.OnClientDeleted += async (_) =>
+        {
+            await GetAllClients();
+            StateHasChanged();
+        };
 
-        IsLoading = false;
+        await _ClientsRepository.InitializeConnectionHubClient();
+        await GetAllClients();
     }
-}
-<CrudDefaultLayout Title="Usuários"
-           GridCells="columns"
-           Data="rows" />
 
+    #endregion
+
+    #region --Methods
+
+    async Task GetAllClients()
+    {
+        PaginationDefault<GetClientResponse> result = await _ClientsRepository.GetPaginatedClients(new(1, 10, 1));
+
+        Page = result.Page;
+        PageSize = result.PageSize;
+        TotalPages = result.TotalPages;
+        _rows = result.Data
+            .Select(client =>
+            {
+                dynamic expando = new ExpandoObject();
+                var dict = (IDictionary<string, object>)expando;
+
+                dict["Id"] = client.Id;
+                dict["Phone"] = client.Phone;
+                dict["Name"] = client.Name;
+                dict["CpfCnpj"] = client.CpfCnpj;
+                dict["PersonType"] = client.PersonType;
+                dict["Email"] = client.Email;
+                dict["BirthDate"] = client.BirthDate;
+                dict["State"] = client.State;
+                dict["City"] = client.City;
+                dict["Cep"] = client.Cep;
+                dict["Number"] = client.Number;
+                dict["Neighborhood"] = client.Neighborhood;
+                dict["Complement"] = client.Complement;
+                dict["Actions"] = "";
+
+                return (ExpandoObject)expando;
+            })
+            .ToList();
+        IsLoading = false;
+
+        StateHasChanged();
+    }
+
+    private Task ButtonClickedCallback()
+    {
+        navigationManager.NavigateTo("/RegisterClient");
+        return Task.CompletedTask;
+    }
+
+    private Task ButtonClickedCallbackEdit(dynamic row)
+    {
+        navigationManager.NavigateTo($"/UpdateClient/{row.Id}");
+        return Task.CompletedTask;
+    }
+
+    #endregion
+
+}
+
+<CrudDefaultLayout
+    Title="Users"
+    ButtonClicked="ButtonClickedCallback"
+    GridCells="_columns"
+    IsLoading="IsLoading"
+    Data="_rows"
+    Page="Page"
+    PageSize="PageSize"
+    TotalPages="TotalPages"
+/>

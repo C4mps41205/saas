@@ -1,33 +1,41 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM.API\\CRM.API.csproj": {}
+    "C:\\Users\\dev2\\RiderProjects\\saas\\CRM.API\\CRM.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj": {
+    "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\obj\\",
+        "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\dev2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dev2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Domain\\Domain.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Domain\\Domain.csproj"
               }
             }
           }
@@ -41,8 +49,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -69,37 +76,45 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM.API\\CRM.API.csproj": {
+    "C:\\Users\\dev2\\RiderProjects\\saas\\CRM.API\\CRM.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM.API\\CRM.API.csproj",
+        "projectUniqueName": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM.API\\CRM.API.csproj",
         "projectName": "CRM.API",
-        "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM.API\\CRM.API.csproj",
-        "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM.API\\obj\\",
+        "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM.API\\CRM.API.csproj",
+        "packagesPath": "C:\\Users\\dev2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM.API\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dev2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj"
               },
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Ioc\\Infra.Ioc.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Ioc\\Infra.Ioc.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Ioc\\Infra.Ioc.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Ioc\\Infra.Ioc.csproj"
               }
             }
           }
@@ -113,8 +128,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -150,34 +164,42 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM_SAAS\\CRM_SAAS.csproj": {
+    "C:\\Users\\dev2\\RiderProjects\\saas\\CRM_SAAS\\CRM_SAAS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM_SAAS\\CRM_SAAS.csproj",
+        "projectUniqueName": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM_SAAS\\CRM_SAAS.csproj",
         "projectName": "CRM_SAAS",
-        "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM_SAAS\\CRM_SAAS.csproj",
-        "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM_SAAS\\obj\\",
+        "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM_SAAS\\CRM_SAAS.csproj",
+        "packagesPath": "C:\\Users\\dev2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM_SAAS\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dev2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj"
               }
             }
           }
@@ -191,13 +213,20 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "Microsoft.AspNetCore.Components": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
             "Microsoft.AspNetCore.Components.WebAssembly": {
               "target": "Package",
               "version": "[9.0.2, )"
@@ -207,17 +236,33 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.2, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.2, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.8.0, )"
             }
           },
           "imports": [
@@ -234,7 +279,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[9.0.2, 9.0.2]"
+              "version": "[9.0.0, 9.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -242,7 +287,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -251,22 +296,30 @@
         }
       }
     },
-    "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Domain\\Domain.csproj": {
+    "C:\\Users\\dev2\\RiderProjects\\saas\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\dev2\\RiderProjects\\saas\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\dev2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dev2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -284,8 +337,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -306,34 +358,42 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Data\\Infra.Data.csproj": {
+    "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Data\\Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Data\\Infra.Data.csproj",
+        "projectUniqueName": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Data\\Infra.Data.csproj",
         "projectName": "Infra.Data",
-        "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Data\\Infra.Data.csproj",
-        "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Data\\obj\\",
+        "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Data\\Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\dev2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dev2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Domain\\Domain.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Domain\\Domain.csproj"
               }
             }
           }
@@ -347,8 +407,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -391,40 +450,48 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Ioc\\Infra.Ioc.csproj": {
+    "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Ioc\\Infra.Ioc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Ioc\\Infra.Ioc.csproj",
+        "projectUniqueName": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Ioc\\Infra.Ioc.csproj",
         "projectName": "Infra.Ioc",
-        "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Ioc\\Infra.Ioc.csproj",
-        "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Ioc\\obj\\",
+        "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Ioc\\Infra.Ioc.csproj",
+        "packagesPath": "C:\\Users\\dev2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Ioc\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dev2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj"
               },
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Data\\Infra.Data.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Data\\Infra.Data.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Data\\Infra.Data.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Data\\Infra.Data.csproj"
               },
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -438,8 +505,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -470,40 +536,48 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\dev2\\RiderProjects\\saas\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\dev2\\RiderProjects\\saas\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\dev2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dev2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Application\\Application.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Application\\Application.csproj"
               },
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM_SAAS\\CRM_SAAS.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\CRM_SAAS\\CRM_SAAS.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\CRM_SAAS\\CRM_SAAS.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM_SAAS\\CRM_SAAS.csproj"
               },
-              "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Data\\Infra.Data.csproj": {
-                "projectPath": "C:\\Users\\Lucas\\RiderProjects\\CRM_SAAS\\Infra.Data\\Infra.Data.csproj"
+              "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Data\\Infra.Data.csproj": {
+                "projectPath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infra.Data\\Infra.Data.csproj"
               }
             }
           }
@@ -517,8 +591,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -539,7 +612,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

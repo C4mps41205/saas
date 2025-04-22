@@ -1,0 +1,249 @@
+﻿@page "/RegisterClient"
+@page "/UpdateClient/{id:guid}"
+@using Application.Dto.Request
+@using Application.Dto.Response
+@using Domain.Enum
+
+@code {
+
+    #region --Variables
+
+    [Parameter] public Guid? Id { get; set; }
+
+    ClientRequest _clientRequest = new(
+        "",
+        "",
+        "",
+        PersonType.pf,
+        "",
+        new DateTime(),
+        State.Mg,
+        "",
+        "",
+        0,
+        "",
+        "",
+        new()
+    );
+
+    private string? _previousUrl;
+
+    #endregion
+
+    #region --Base
+
+    protected async override void OnInitialized()
+    {
+        _previousUrl = navigationManager.Uri;
+
+        if (Id.HasValue)
+            GetUserById();
+    }
+
+    #endregion
+
+    #region --Methods
+
+    void CreateUser()
+    {
+        if (Id is null)
+            _ClientsRepository.CreateClients(_clientRequest);
+        else
+            _ClientsRepository.UpdateClients(_clientRequest, Id ?? new Guid());
+
+        if (string.IsNullOrEmpty(_previousUrl))
+            navigationManager.NavigateTo(_previousUrl);
+        else
+        {
+            navigationManager.NavigateTo("/Clients");
+        }
+    }
+
+    void DeleteUser()
+    {
+        _ClientsRepository.DeleteClients(Id ?? new Guid());
+        navigationManager.NavigateTo("/Clients");
+    }
+
+    async void GetUserById()
+    {
+        GetClientResponse result = await _ClientsRepository.GetClientsById(new(Id ?? new Guid()));
+        _clientRequest = _clientRequest with
+        {
+            Phone = result.Phone,
+            Name = result.Name,
+            CpfCnpj = result.CpfCnpj,
+            PersonType = result.PersonType,
+            Email = result.Email,
+            BirthDate = result.BirthDate,
+            State = result.State,
+            City = result.City,
+            Cep = result.Cep,
+            Number = result.Number,
+            Neighborhood = result.Neighborhood,
+            Complement = result.Complement,
+        };
+        StateHasChanged();
+    }
+
+    #endregion
+
+}
+
+<div class="bg-white rounded-md p-4 overflow-x-auto">
+    <div class="lg:col-span-2">
+        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="Phone"
+                    Label="Phone"
+                    Placeholder="(99) 99999-9999"
+                    Name="Phone"
+                    Type="Text"
+                    ValueInput="@_clientRequest.Phone"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { Phone = s })"/>
+            </div>
+
+            <div class="md:col-span-3">
+                <InputDefault
+                    Id="FullName"
+                    Label="Full Name"
+                    Placeholder="Full Name"
+                    Name="FullName"
+                    Type="Text"
+                    ValueInput="@_clientRequest.Name"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { Name = s })"/>
+            </div>
+
+            <div class="md:col-span-3">
+                <InputDefault
+                    Id="CpfCnpj"
+                    Label="CPF/CNPJ"
+                    Placeholder="000.000.000-00"
+                    Name="CpfCnpj"
+                    Type="Text"
+                    ValueInput="@_clientRequest.CpfCnpj"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { CpfCnpj = s })"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="PersonType"
+                    Label="Person Type"
+                    Placeholder=""
+                    Name="PersonType"
+                    Type="Text"
+                    ValueInput="@_clientRequest.PersonType.ToString()"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { PersonType = Enum.Parse<PersonType>(s) })"/>
+            </div>
+
+            <div class="md:col-span-3">
+                <InputDefault
+                    Id="EmailAddress"
+                    Label="Email Address"
+                    Placeholder="email@domain.com"
+                    Name="EmailAddress"
+                    Type="Email"
+                    ValueInput="@_clientRequest.Email"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { Email = s })"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="BirthDate"
+                    Label="Birth Date"
+                    Placeholder="YYYY-MM-DD"
+                    Name="BirthDate"
+                    Type="Date"
+                    ValueInput="@_clientRequest.BirthDate.ToString()"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { BirthDate = DateTime.Parse(s) })"/>
+            </div>
+
+            <div class="md:col-span-1">
+                <InputDefault
+                    Id="State"
+                    Label="State"
+                    Placeholder=""
+                    Name="State"
+                    Type="Text"
+                    ValueInput="@_clientRequest.State?.ToString()"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { State = Enum.TryParse<State>(s, out var val) ? val : null })"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="City"
+                    Label="City"
+                    Placeholder="City"
+                    Name="City"
+                    Type="Text"
+                    ValueInput="@_clientRequest.City"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { City = s })"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="Cep"
+                    Label="CEP"
+                    Placeholder="00000-000"
+                    Name="Cep"
+                    Type="Text"
+                    ValueInput="@_clientRequest.Cep"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { Cep = s })"/>
+            </div>
+
+            <div class="md:col-span-1">
+                <InputDefault
+                    Id="Number"
+                    Label="Number"
+                    Placeholder="123"
+                    Name="Number"
+                    Type="Number"
+                    ValueInput="@_clientRequest.Number.ToString()"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { Number = int.TryParse(s, out var n) ? n : null })"/>
+            </div>
+
+            <div class="md:col-span-4">
+                <InputDefault
+                    Id="Neighborhood"
+                    Label="Neighborhood"
+                    Placeholder=""
+                    Name="Neighborhood"
+                    Type="Text"
+                    ValueInput="@_clientRequest.Neighborhood"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { Neighborhood = s })"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="Complement"
+                    Label="Complement"
+                    Placeholder=""
+                    Name="Complement"
+                    Type="Text"
+                    ValueInput="@_clientRequest.Complement"
+                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { Complement = s })"/>
+            </div>
+
+            <div class="md:col-span-5 text-right">
+                <div class="inline-flex items-end m-2">
+                    @if (Id is not null)
+                    {
+                        <ButtonDefault
+                            Id="Delete"
+                            Label="Delete"
+                            Name="Delete"
+                            ValueChangedCallback="DeleteUser"/>
+                    }
+                    <ButtonDefault
+                        Id="Submit"
+                        Label="Submit"
+                        Name="Submit"
+                        ValueChangedCallback="CreateUser"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

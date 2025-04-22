@@ -1,12 +1,12 @@
-﻿using Application.Usecases;
-using Microsoft.AspNetCore.SignalR;
+﻿using Infrastructure.Hubs;
 
 namespace CRM.API.Controllers;
 
-public static class ControllerSignalR
+internal static class ControllerSignalR
 {
     public static void MapSignalR(this WebApplication app)
     {
-        app.MapHub<ClientsUsecase>("Clients");
+        app.MapHub<ClientHub>("/ClientsHub");
+        app.MapHub<EmployeeHub>("/EmployeeHub");
     }
 }

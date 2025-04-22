@@ -1,37 +1,111 @@
 ﻿@page "/Users"
 @using System.Dynamic
+@using Application.Dto
+@using Application.Dto.Response
 @using CRM_SAAS.Models
 
 @code {
-  List<GridCells> columns = new()
-  {
-    new GridCells { Collumn = "Nome" },
-    new GridCells { Collumn = "Email" },
-    new GridCells { Collumn = "País" },
-  };
 
-  List<ExpandoObject> rows = new();
-  public bool IsLoading { get; set; } = true;
+    #region --Variables
 
-  protected override void OnInitialized()
-  {
-    dynamic user1 = new ExpandoObject();
-    user1.Nome = "João da Silva";
-    user1.Email = "joao@email.com";
-    user1.País = "Brasil";
+    List<GridCells> _columns;
+    List<ExpandoObject> _rows = new();
+    public bool IsLoading { get; set; } = true;
+    public int Page { get; set; }
+    public int PageSize { get; set; }
+    public int TotalPages { get; set; }
 
-    dynamic user2 = new ExpandoObject();
-    user2.Nome = "Maria Souza";
-    user2.Email = "maria@email.com";
-    user2.País = "Portugal";
+    #endregion
 
-    rows.Add(user1);
-    rows.Add(user2);
+    #region --Base
 
-    IsLoading = false;
-  }
+    protected override async Task OnInitializedAsync()
+    {
+        _columns = new List<GridCells>
+        {
+            new() { Collumn = "Name" },
+            new() { Collumn = "Simultaneous Services" },
+            new()
+            {
+                Collumn = "Actions",
+                Render = row =>
+                    @<ButtonDefault
+                        Id="Edit"
+                        Label="Edit"
+                        Name="Edit"
+                        ValueChangedCallback="r => ButtonClickedCallbackEdit(row)"
+                    />
+            }
+        };
+
+        _EmployeeRepository.OnEmployeesCreated += async (_) =>
+        {
+            await GetAllUsers();
+            StateHasChanged();
+        };
+
+        _EmployeeRepository.OnEmployeeDeleted += async (_) =>
+        {
+            await GetAllUsers();
+            StateHasChanged();
+        };
+
+        await _EmployeeRepository.InitializeConnectionHubEmployee();
+        await GetAllUsers();
+    }
+
+    #endregion
+
+    #region --Methods
+
+    async Task GetAllUsers()
+    {
+        PaginationDefault<GetEmployeeResponse> result = await _EmployeeRepository.GetPaginatedEmployees(new(1, 10, 1));
+
+        Page = result.Page;
+        PageSize = result.PageSize;
+        TotalPages = result.TotalPages;
+        _rows = result.Data
+            .Select(Employee =>
+            {
+                dynamic expando = new ExpandoObject();
+                var dict = (IDictionary<string, object>)expando;
+
+                dict["Name"] = Employee.Name;
+                dict["SimultaneousServices"] = Employee.SimultaneousServices;
+                dict["Actions"] = "";
+
+                return (ExpandoObject)expando;
+            })
+            .ToList();
+        IsLoading = false;
+
+        StateHasChanged();
+    }
+
+    private Task ButtonClickedCallback()
+    {
+        navigationManager.NavigateTo("/RegisterEmployee");
+        return Task.CompletedTask;
+    }
+
+    private Task ButtonClickedCallbackEdit(dynamic row)
+    {
+        navigationManager.NavigateTo($"/UpdateEmployee/{row.Id}");
+        return Task.CompletedTask;
+    }
+
+    #endregion
+
 }
-<CrudDefaultLayout Title="Equipq"
-                   GridCells="columns"
-                   Data="rows" />
 
+<CrudDefaultLayout
+    Title="Employee"
+    ButtonClicked="ButtonClickedCallback"
+    GridCells="_columns"
+    IsLoading="IsLoading"
+    Data="_rows"
+    Page="Page"
+    PageSize="PageSize"
+    TotalPages="TotalPages"
+/>

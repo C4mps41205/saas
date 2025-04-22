@@ -6,9 +6,9 @@ namespace Application.Repository;
 
 public interface IClientsRepository
 {
-    PaginationDefault<GetClientResponse> GetPaginatedClients(GetClientRequest pagination);
-    CreateClientResponse CreateCategory(CreateClientRequest createClientRequest);
-    UpdateClientResponse UpdateCategory(UpdateClientRequest categoryDto, Guid id);
-    bool DeleteCategory(Guid id);
-    
+    Task<PaginationDefault<GetClientResponse>> GetPaginatedClients(GetClientRequest pagination);
+    GetClientResponse GetClientById(GetClientByIdRequest getClientByIdRequest);
+    CreateClientResponse CreateClient(ClientRequest clientRequest);
+    bool UpdateClient(ClientRequest clientDto, Guid id);
+    bool DeleteClient(Guid id);
 }

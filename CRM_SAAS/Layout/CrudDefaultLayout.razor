@@ -1,16 +1,32 @@
 ﻿@using System.Dynamic
 @using CRM_SAAS.Models
+@using Microsoft.AspNetCore.Components
 
 @code {
     [Parameter] public required ICollection<GridCells> GridCells { get; set; }
     [Parameter] public required IEnumerable<ExpandoObject> Data { get; set; }
     [Parameter] public required string Title { get; set; }
-    [Parameter] public bool IsLoading { get; set; } = true;
+    [Parameter] public bool IsLoading { get; set; } = false;
+    [Parameter] public EventCallback<bool> ButtonClicked { get; set; }
+    [Parameter] public int Page { get; set; } 
+    [Parameter] public int PageSize { get; set; } 
+    [Parameter] public int TotalCount { get; set; } 
+    [Parameter] public int TotalPages { get; set; } 
+
+    private async Task SendAddButtonCallback()
+    {
+        await ButtonClicked.InvokeAsync(true);
+    }
 }
 
 <div class="flex items-center justify-between mb-4">
     <h2 class="text-xl font-semibold">@Title</h2>
-    <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Add @Title</button>
+    <ButtonDefault 
+        Id="ButtonAddDefault"
+        Name="ButtonAddDefault"
+        Label="@($"+ Add {Title}")"
+        ValueChangedCallback="SendAddButtonCallback"
+    />
 </div>
 
 <div class="bg-white rounded-md p-4 overflow-x-auto">
@@ -59,7 +75,11 @@
                     @foreach (var cell in GridCells)
                     {
                         <td class="p-2">
-                            @if (rowDict.TryGetValue(cell.Collumn, out var value))
+                            @if (cell.Render != null)
+                            {
+                                @cell.Render.Invoke(row)
+                            }
+                            else if (rowDict.TryGetValue(cell.Collumn, out var value))
                             {
                                 @value
                             }
@@ -77,8 +97,10 @@
         <div class="flex items-center justify-between mt-4">
             <p class="text-sm text-gray-500">Showing 1 to 10 of 13 entries</p>
             <div class="flex space-x-1">
-                <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded">1</button>
-                <button class="px-3 py-1 bg-gray-200 text-sm rounded">2</button>
+                @for (int page = 1; page <= TotalPages; page++)
+                {
+                    <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded">1</button>
+                }
             </div>
         </div>
     }

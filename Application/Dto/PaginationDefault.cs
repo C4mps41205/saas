@@ -2,9 +2,9 @@
 
 public class PaginationDefault<T> 
 {
-    public int Page;
-    public int PageSize;
-    public int TotalCount;
-    public int TotalPages;
-    public List<T> Data;
+    public int Page { get; set; } 
+    public int PageSize { get; set; } 
+    public int TotalCount { get; set; } 
+    public int TotalPages { get; set; } 
+    public List<T> Data { get; set; } 
 };
