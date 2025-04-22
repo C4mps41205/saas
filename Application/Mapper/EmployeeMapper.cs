@@ -11,9 +11,9 @@ public class EmployeeMapper : IBaseMappper<EmployeeResponse, Employee, EmployeeR
     {
         return new()
         {
-            Name = input.Name,
-            SimultaneousServices = input.SimultaneousServices,
-            Photo = input.Photo
+            Name = "",
+            SimultaneousServices = 0,
+            Photo = ""
         };
     }
 
