@@ -9,20 +9,18 @@ public class EmployeeMapper : IBaseMappper<EmployeeResponse, Employee, EmployeeR
 {
     public Employee ToEntity(EmployeeRequest input)
     {
-        return new()
-        {
-            Name = "",
-            SimultaneousServices = 0,
-            Photo = ""
-        };
+        throw new NotImplementedException();
     }
 
     public EmployeeResponse ToDto(Employee input)
     {
         return new(
             input.Name,
+            input.CPF,
             input.SimultaneousServices,
-            input.Photo
+            input.Email,
+            input.CorporateEmail,
+            input.Phone
         );
     }
 }

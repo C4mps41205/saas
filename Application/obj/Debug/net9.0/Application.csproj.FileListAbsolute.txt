@@ -29,3 +29,4 @@ C:\Users\dev2\RiderProjects\saas\Application\obj\Debug\net9.0\Application.dll
 C:\Users\dev2\RiderProjects\saas\Application\obj\Debug\net9.0\refint\Application.dll
 C:\Users\dev2\RiderProjects\saas\Application\obj\Debug\net9.0\Application.pdb
 C:\Users\dev2\RiderProjects\saas\Application\obj\Debug\net9.0\ref\Application.dll
+C:\Users\Lucas\RiderProjects\CRM_SAAS\Application\obj\Debug\net9.0\Application.sourcelink.json

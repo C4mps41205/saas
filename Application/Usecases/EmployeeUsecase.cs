@@ -14,7 +14,7 @@ public class EmployeeUsecase(IEmployeeRepository repository)
         return await repository.GetPaginatedEmployees(request);
     }
     
-    public GetEmployeeResponse GetEmployeeById(GetEmployeeByIdRequest request)
+    public EmployeeResponse GetEmployeeById(GetEmployeeByIdRequest request)
     {
         return repository.GetEmployeeById(request);
     }   
@@ -23,7 +23,7 @@ public class EmployeeUsecase(IEmployeeRepository repository)
 
     #region --Actions
 
-    public CreateEmployeeResponse CreateEmployee(EmployeeRequest request)
+    public EmployeeResponse CreateEmployee(CreateEmployeeRequest request)
     {
         return repository.CreateEmployee(request);
     }

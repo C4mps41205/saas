@@ -7,8 +7,8 @@ namespace Application.Repository;
 public interface IEmployeeRepository
 {
     Task<PaginationDefault<EmployeeResponse>> GetPaginatedEmployees(GetEmployeeRequest pagination);
-    GetEmployeeResponse GetEmployeeById(GetEmployeeByIdRequest getEmployeeByIdRequest);
-    CreateEmployeeResponse CreateEmployee(EmployeeRequest employeeRequest);
+    EmployeeResponse GetEmployeeById(GetEmployeeByIdRequest getEmployeeByIdRequest);
+    EmployeeResponse CreateEmployee(CreateEmployeeRequest employeeRequest);
     bool UpdateEmployee(EmployeeRequest employeeDto, Guid id);
     bool DeleteEmployee(Guid id);
 }

@@ -12,8 +12,8 @@ public interface IEmployeeRepository
     Task InitializeConnectionHubEmployee();
     Task DisconnectAsync();
     Task<PaginationDefault<GetEmployeeResponse>> GetPaginatedEmployees(EmployeeRequest request);
-    Task<CreateEmployeeResponse> CreateEmployees(EmployeeRequest request);
-    Task<bool> UpdateEmployees(EmployeeRequest request, Guid Id);
+    Task<bool> CreateEmployees(CreateEmployeeRequest request);
+    Task<bool> UpdateEmployees(CreateEmployeeRequest request, Guid Id);
     Task<HttpResponseMessage> DeleteEmployees(Guid Id);
     Task<GetEmployeeResponse> GetEmployeesById(GetEmployeeByIdRequest request);
 }

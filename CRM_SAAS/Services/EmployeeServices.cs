@@ -17,7 +17,7 @@ public class EmployeeServices(HttpClient httpClient) : IEmployeeRepository
     public async Task InitializeConnectionHubEmployee()
     {
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl("http://localhost:5159/ClientsHub")
+            .WithUrl("http://localhost:5159/EmployeeHub")
             .WithAutomaticReconnect()
             .Build();
 
@@ -50,20 +50,21 @@ public class EmployeeServices(HttpClient httpClient) : IEmployeeRepository
     public async Task<PaginationDefault<GetEmployeeResponse>> GetPaginatedEmployees(EmployeeRequest request)
     {
         return await httpClient.GetFromJsonAsync<PaginationDefault<GetEmployeeResponse>>(
-                   $"Clients/GetPaginatedEmployees?PageNumber={request.PageNumber}&PageSize={request.PageSize}&Page={request.Page}") ??
+                   $"Employee/GetPaginatedEmployees?PageNumber={request.PageNumber}&PageSize={request.PageSize}&Page={request.Page}") ??
                new();
     }
 
-    public Task<CreateEmployeeResponse> CreateEmployees(EmployeeRequest request)
+    public async Task<bool> CreateEmployees(CreateEmployeeRequest request)
     {
-        throw new NotImplementedException();
+        var response = await httpClient.PostAsJsonAsync("Employee/CreateEmployee", request);
+        return response.IsSuccessStatusCode;
     }
 
     #endregion
 
     #region --Actions
 
-    public Task<bool> UpdateEmployees(EmployeeRequest request, Guid Id)
+    public Task<bool> UpdateEmployees(CreateEmployeeRequest request, Guid Id)
     {
         throw new NotImplementedException();
     }

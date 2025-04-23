@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CRM.API.Controllers;
 
 [ApiController]
+[Route("[controller]")]
 public class EmployeeController(EmployeeUsecase usecase) : ControllerBase
 {
     #region --Queries
@@ -30,7 +31,7 @@ public class EmployeeController(EmployeeUsecase usecase) : ControllerBase
     {
         try
         {
-            GetEmployeeResponse response = usecase.GetEmployeeById(request);
+            EmployeeResponse response = usecase.GetEmployeeById(request);
             return Ok(response);
         }
         catch (Exception e)
@@ -44,7 +45,7 @@ public class EmployeeController(EmployeeUsecase usecase) : ControllerBase
     #region --Actions
 
     [HttpPost("CreateEmployee")]
-    public ActionResult Create([FromBody] EmployeeRequest request)
+    public ActionResult Create([FromBody] CreateEmployeeRequest request)
     {
         try
         {

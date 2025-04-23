@@ -12,12 +12,14 @@ public static class InterfaceDependencyInjection
         #region Adapthers
 
         services.AddScoped<IClientsRepository, ClientAdapher>();
+        services.AddScoped<IEmployeeRepository, EmployeeAdapher>();
 
         #endregion
 
         #region Usecase
 
         services.AddScoped<ClientsUsecase>();
+        services.AddScoped<EmployeeUsecase>();
 
         #endregion
     }

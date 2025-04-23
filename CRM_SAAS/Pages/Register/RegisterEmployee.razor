@@ -1,0 +1,191 @@
+﻿@page "/RegisterEmployee"
+@page "/UpdateEmployee/{id:guid}"
+@using Application.Dto.Request
+@using Application.Dto.Response
+@using Domain.Enum
+
+@code {
+
+    #region --Variables
+
+    [Parameter] public Guid? Id { get; set; }
+
+    CreateEmployeeRequest _entityRequest = new(
+        "",
+        "",
+        1,
+        "",
+        "",
+        "",
+        ""
+    );
+
+    private string? _previousUrl;
+
+    #endregion
+
+    #region --Base
+
+    protected async override void OnInitialized()
+    {
+        _previousUrl = navigationManager.Uri;
+
+        if (Id.HasValue)
+            GetUserById();
+    }
+
+    #endregion
+
+    #region --Methods
+
+    void CreateUser()
+    {
+        if (Id is null)
+            _EmployeeRepository.CreateEmployees(_entityRequest);
+        else
+            _EmployeeRepository.UpdateEmployees(_entityRequest, Id ?? new Guid());
+
+        if (string.IsNullOrEmpty(_previousUrl))
+            navigationManager.NavigateTo(_previousUrl);
+        else
+        {
+            navigationManager.NavigateTo("/Clients");
+        }
+    }
+
+    void DeleteUser()
+    {
+        _ClientsRepository.DeleteClients(Id ?? new Guid());
+        navigationManager.NavigateTo("/Clients");
+    }
+
+    async void GetUserById()
+    {
+        GetClientResponse result = await _ClientsRepository.GetClientsById(new(Id ?? new Guid()));
+        _entityRequest = _entityRequest with
+        {
+            Phone = result.Phone,
+            Name = result.Name,
+        };
+        StateHasChanged();
+    }
+
+    void handleNameChange(string value)
+    {
+        string email = value.Replace(" ", ".");
+        _entityRequest = _entityRequest with { CorporateEmail = email + "@gmail.com" };
+    }
+
+    #endregion
+
+}
+
+<div class="bg-white rounded-md p-4 overflow-x-auto">
+    <div class="lg:col-span-2">
+        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+
+            <div class="md:col-span-3">
+                <InputDefault
+                    Id="Name"
+                    Label="Name"
+                    Placeholder="Full Name"
+                    Name="Name"
+                    Type="Text"
+                    ValueInput="@_entityRequest.Name"
+                    ValueChangedCallback="@(s =>
+                                          {
+                                              handleNameChange(s);
+                                              _entityRequest = _entityRequest with { Name = s };
+                                          })"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="CPF"
+                    Label="CPF"
+                    Placeholder="000.000.000-00"
+                    Name="CPF"
+                    Type="Text"
+                    ValueInput="@_entityRequest.CPF"
+                    ValueChangedCallback="@(s => _entityRequest = _entityRequest with { CPF = s })"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="SimultaneousServices"
+                    Label="Simultaneous Services"
+                    Placeholder="0"
+                    Name="SimultaneousServices"
+                    Type="Number"
+                    ValueInput="@_entityRequest.SimultaneousServices.ToString()"
+                    ValueChangedCallback="@(s => _entityRequest = _entityRequest with { SimultaneousServices = int.TryParse(s, out var val) ? val : 0 })"/>
+            </div>
+
+            <div class="md:col-span-3">
+                <InputDefault
+                    Id="Email"
+                    Label="Email"
+                    Placeholder="personal@email.com"
+                    Name="Email"
+                    Type="Email"
+                    ValueInput="@_entityRequest.Email"
+                    ValueChangedCallback="@(s => _entityRequest = _entityRequest with { Email = s })"/>
+            </div>
+
+            <div class="md:col-span-3">
+                <InputDefault
+                    Id="CorporateEmail"
+                    Label="Corporate Email"
+                    Placeholder="corporate@email.com"
+                    Name="CorporateEmail"
+                    Type="Email"
+                    ValueInput="@_entityRequest.CorporateEmail"
+                    ValueChangedCallback="@(s => _entityRequest = _entityRequest with { CorporateEmail = s })"/>
+            </div>
+            
+            @if (Id == null)
+            {
+                <div class="md:col-span-3">
+                    <InputDefault
+                        Id="password"
+                        Label="Password"
+                        Placeholder="..."
+                        Name="password"
+                        Type="Password"
+                        ValueInput="@_entityRequest.Password"
+                        ValueChangedCallback="@(s => _entityRequest = _entityRequest with { Password = s })"/>
+                </div>
+            }
+
+            <div class="md:col-span-2">
+                <InputDefault
+                    Id="Phone"
+                    Label="Phone"
+                    Placeholder="(99) 99999-9999"
+                    Name="Phone"
+                    Type="Text"
+                    ValueInput="@_entityRequest.Phone"
+                    ValueChangedCallback="@(s => _entityRequest = _entityRequest with { Phone = s })"/>
+            </div>
+
+            <div class="md:col-span-5 text-right">
+                <div class="inline-flex items-end m-2">
+                    @if (Id is not null)
+                    {
+                        <ButtonDefault
+                            Id="Delete"
+                            Label="Delete"
+                            Name="Delete"
+                            ValueChangedCallback="DeleteUser"/>
+                    }
+                    <ButtonDefault
+                        Id="Submit"
+                        Label="Submit"
+                        Name="Submit"
+                        ValueChangedCallback="CreateUser"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

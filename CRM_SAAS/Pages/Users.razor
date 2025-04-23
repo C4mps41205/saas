@@ -24,7 +24,11 @@
         _columns = new List<GridCells>
         {
             new() { Collumn = "Name" },
-            new() { Collumn = "Simultaneous Services" },
+            new() { Collumn = "CPF" },
+            new() { Collumn = "Simultaneous services" },
+            new() { Collumn = "Email" },
+            new() { Collumn = "CorporateEmail" },
+            new() { Collumn = "Phone" },
             new()
             {
                 Collumn = "Actions",
@@ -72,7 +76,11 @@
                 var dict = (IDictionary<string, object>)expando;
 
                 dict["Name"] = Employee.Name;
+                dict["CPF"] = Employee.CPF;
                 dict["SimultaneousServices"] = Employee.SimultaneousServices;
+                dict["Email"] = Employee.Email;
+                dict["CorporateEmail"] = Employee.CorporateEmail;
+                dict["Phone"] = Employee.Phone;
                 dict["Actions"] = "";
 
                 return (ExpandoObject)expando;
@@ -100,7 +108,7 @@
 }
 
 <CrudDefaultLayout
-    Title="Employee"
+    Title="Employees"
     ButtonClicked="ButtonClickedCallback"
     GridCells="_columns"
     IsLoading="IsLoading"

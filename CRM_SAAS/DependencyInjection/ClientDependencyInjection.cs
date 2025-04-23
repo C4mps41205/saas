@@ -11,5 +11,10 @@ public static class ClientDependencyInjection
         {
             client.BaseAddress = new Uri("http://localhost:5159/");
         });
+        
+        services.AddHttpClient<IEmployeeRepository, EmployeeServices>(client =>
+        {
+            client.BaseAddress = new Uri("http://localhost:5159/");
+        });
     }
 }

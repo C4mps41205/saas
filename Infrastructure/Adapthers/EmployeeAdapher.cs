@@ -3,12 +3,19 @@ using Application.Dto.Request;
 using Application.Dto.Response;
 using Application.Mapper;
 using Application.Repository;
+using Domain.Entitites;
 using Infra.Data.DbContext;
+using Infrastructure.Hubs;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infrastructure.Adapthers;
 
-public class EmployeeAdapher(AppDbContext appDbContext) : IEmployeeRepository
+public class EmployeeAdapher(AppDbContext appDbContext, IHubContext<EmployeeHub> hubContext) : IEmployeeRepository
 {
+    #region --Queries
+
     public Task<PaginationDefault<EmployeeResponse>> GetPaginatedEmployees(GetEmployeeRequest pagination)
     {
         int totalCount = appDbContext.Clients.Count();
@@ -29,14 +36,38 @@ public class EmployeeAdapher(AppDbContext appDbContext) : IEmployeeRepository
         });
     }
 
-    public GetEmployeeResponse GetEmployeeById(GetEmployeeByIdRequest getEmployeeByIdRequest)
+    public EmployeeResponse GetEmployeeById(GetEmployeeByIdRequest getEmployeeByIdRequest)
     {
-        throw new NotImplementedException();
+        Employee? client = appDbContext.Employees.Find(getEmployeeByIdRequest.Guid);
+        
+        if(client == null)
+            throw new ApplicationException("Employee not found");
+
+        return new EmployeeMapper().ToDto(client);
     }
 
-    public CreateEmployeeResponse CreateEmployee(EmployeeRequest employeeRequest)
+    #endregion
+
+    #region --Actions
+
+    public EmployeeResponse CreateEmployee(CreateEmployeeRequest employeeRequest)
     {
-        throw new NotImplementedException();
+        Employee newEmployee = new CreateEmployeeMapper().ToEntity(employeeRequest);
+        
+        PasswordHasher<Employee> passwordHasher = new ();
+        
+        string passwordHash = passwordHasher.HashPassword(newEmployee, employeeRequest.Password!);
+        byte[] passwordSalt = Convert.FromBase64String(passwordHash);
+        
+        newEmployee.PasswordHash = passwordHash;
+        newEmployee.PasswordSalt = passwordSalt;
+        
+        EntityEntry<Employee> createdCategory = appDbContext.Employees.Add(newEmployee);
+        appDbContext.SaveChanges();
+
+        var dto = new CreateEmployeeMapper().ToDto(createdCategory.Entity);
+        hubContext.Clients.All.SendAsync("EmployeeCreated", dto);
+        return dto;
     }
 
     public bool UpdateEmployee(EmployeeRequest employeeDto, Guid id)
@@ -46,6 +77,17 @@ public class EmployeeAdapher(AppDbContext appDbContext) : IEmployeeRepository
 
     public bool DeleteEmployee(Guid id)
     {
-        throw new NotImplementedException();
+        Employee? client = appDbContext.Employees.Find(id);
+        
+        if(client == null)
+            throw new ApplicationException("Employee not found");
+        
+        appDbContext.Employees.Remove(client);
+        appDbContext.SaveChanges();
+        
+        hubContext.Clients.All.SendAsync("EmployeeDeleted", id);
+        return true;
     }
+
+    #endregion
 }
