@@ -8,25 +8,54 @@
     [Parameter] public required string Title { get; set; }
     [Parameter] public bool IsLoading { get; set; } = false;
     [Parameter] public EventCallback<bool> ButtonClicked { get; set; }
-    [Parameter] public int Page { get; set; } 
-    [Parameter] public int PageSize { get; set; } 
-    [Parameter] public int TotalCount { get; set; } 
-    [Parameter] public int TotalPages { get; set; } 
+    [Parameter] public EventCallback<int> ButtonPage { get; set; }
+    [Parameter] public int Page { get; set; }
+    [Parameter] public int PageSize { get; set; }
+    [Parameter] public int TotalCount { get; set; }
+    [Parameter] public int TotalPages { get; set; }
+
+    public string Search { get; set; }
 
     private async Task SendAddButtonCallback()
     {
         await ButtonClicked.InvokeAsync(true);
     }
+    
+    private async Task SendButtonPageCallback(int page)
+    {
+        await ButtonPage.InvokeAsync(page);
+    }
+
+
 }
 
 <div class="flex items-center justify-between mb-4">
-    <h2 class="text-xl font-semibold">@Title</h2>
-    <ButtonDefault 
-        Id="ButtonAddDefault"
-        Name="ButtonAddDefault"
-        Label="@($"+ Add {Title}")"
-        ValueChangedCallback="SendAddButtonCallback"
-    />
+    <div>
+        <h2 class="text-xl font-semibold">@Title</h2>
+    </div>
+    <div class="flex gap-3">
+        <InputDefault
+            Id="Search"
+            Label="Search"
+            Placeholder="Search..."
+            Name="Search"
+            ShowLabel="false"
+            Type="Text"
+            ValueInput="@Search"
+            ValueChangedCallback="@(s => Search = s)"/>
+        
+        <ButtonDefault
+            Id="ButtonSearchDefault"
+            Name="ButtonSearchDefault"
+            Label="@($"Search")"
+            ValueChangedCallback="SendAddButtonCallback"/>
+
+        <ButtonDefault
+            Id="ButtonAddDefault"
+            Name="ButtonAddDefault"
+            Label="@($"+ Add {Title}")"
+            ValueChangedCallback="SendAddButtonCallback"/>
+    </div>
 </div>
 
 <div class="bg-white rounded-md p-4 overflow-x-auto">
@@ -95,11 +124,11 @@
         </table>
 
         <div class="flex items-center justify-between mt-4">
-            <p class="text-sm text-gray-500">Showing 1 to 10 of 13 entries</p>
+            <p class="text-sm text-gray-500">Showing @Page to @TotalPages of @TotalCount entries</p>
             <div class="flex space-x-1">
                 @for (int page = 1; page <= TotalPages; page++)
                 {
-                    <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded">1</button>
+                    <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded" @onclick="() => SendButtonPageCallback(page)">1</button>
                 }
             </div>
         </div>

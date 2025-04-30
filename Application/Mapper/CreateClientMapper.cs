@@ -25,15 +25,15 @@ public class CreateClientMapper: IBaseMappper<CreateClientResponse, Client, Clie
             Subordinates = new List<Client>()
         };
 
-        if (input.Subordinates is not null && input.Subordinates.Any())
-        {
-            foreach (var subordinate in input.Subordinates)
-            {
-                var entity = ToEntity(subordinate);
-                entity.BelongsTo = client;
-                client.Subordinates.Add(entity);
-            }
-        }
+        // if (input.Subordinates is not null && input.Subordinates.Any())
+        // {
+        //     foreach (var subordinate in input.Subordinates)
+        //     {
+        //         var entity = ToEntity(subordinate);
+        //         entity.BelongsTo = client;
+        //         client.Subordinates.Add(entity);
+        //     }
+        // }
 
         return client;
     }

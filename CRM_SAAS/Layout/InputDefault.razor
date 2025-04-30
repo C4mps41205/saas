@@ -7,6 +7,7 @@
     [Parameter] public string Type { get; set; } = "text";
     [Parameter] public bool IsDisabled { get; set; } = false;
     [Parameter] public string ValueInput { get; set; } = string.Empty;
+    [Parameter] public bool ShowLabel { get; set; } = true;
     [Parameter] public EventCallback<string> ValueChangedCallback { get; set; }
 
     private bool ShowPassword { get; set; } = false;
@@ -27,10 +28,13 @@
     }
 
     private string InputType => Type == "password" && ShowPassword ? "text" : Type;
-    private string EyeIcon => ShowPassword ? "🙈" : "👁️"; // ou substitua por SVG
+    private string EyeIcon => ShowPassword ? "🙈" : "👁️";
 }
 
-<label for="@Name" class="block text-sm font-medium leading-5 text-gray-700">@Label</label>
+@if (ShowLabel)
+{
+    <label for="@Name" class="block text-sm font-medium leading-5 text-gray-700">@Label</label>
+}
 <div class="relative">
     <input
         id="@Id"
@@ -38,7 +42,7 @@
         value="@ValueInput"
         @oninput="HandleInput"
         placeholder="@Placeholder"
-        type="@InputType"
+        type="@(Type == "Password" ? (ShowPassword ? "text" : "password") : InputType)"
         required="@Required"
         disabled="@IsDisabled"
         class="appearance-none
@@ -57,7 +61,7 @@
             duration-150
             ease-in-out
             sm:text-sm
-            sm:leading-5" />
+            sm:leading-5"/>
 
     @if (Type == "Password")
     {

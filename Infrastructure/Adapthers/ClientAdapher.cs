@@ -38,8 +38,8 @@ public class ClientAdapher(AppDbContext appDbContext, IHubContext<ClientHub> hub
     public GetClientResponse GetClientById(GetClientByIdRequest getClientByIdRequest)
     {
         Client? client = appDbContext.Clients.Find(getClientByIdRequest.Id);
-        
-        if(client == null)
+
+        if (client == null)
             throw new ApplicationException("Client not found");
 
         return new ClientsMapper().ToDto(client);
@@ -63,6 +63,9 @@ public class ClientAdapher(AppDbContext appDbContext, IHubContext<ClientHub> hub
     public bool UpdateClient(ClientRequest clientDto, Guid id)
     {
         var client = appDbContext.Clients.Find(id);
+        
+        if(client == null)
+            throw new ApplicationException("Client not found");
 
         client.Phone = clientDto.Phone;
         client.Name = clientDto.Name;
@@ -76,10 +79,10 @@ public class ClientAdapher(AppDbContext appDbContext, IHubContext<ClientHub> hub
         client.Number = clientDto.Number;
         client.Neighborhood = clientDto.Neighborhood;
         client.Complement = clientDto.Complement;
-        client.Subordinates = [];
+        client.Subordinates = appDbContext.Clients.Where(x => (clientDto.Subordinates ?? new List<Guid>()).Contains(x.Id)).ToList();
 
         appDbContext.SaveChanges();
-        
+
         hubContext.Clients.All.SendAsync("ClientUpdated", new CreateClientMapper().ToDto(client));
         return true;
     }
@@ -87,13 +90,13 @@ public class ClientAdapher(AppDbContext appDbContext, IHubContext<ClientHub> hub
     public bool DeleteClient(Guid id)
     {
         Client? client = appDbContext.Clients.Find(id);
-        
-        if(client == null)
+
+        if (client == null)
             throw new ApplicationException("Client not found");
-        
+
         appDbContext.Clients.Remove(client);
         appDbContext.SaveChanges();
-        
+
         hubContext.Clients.All.SendAsync("ClientDeleted", id);
         return true;
     }

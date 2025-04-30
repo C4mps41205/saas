@@ -26,7 +26,7 @@
 
     #region --Base
 
-    protected async override void OnInitialized()
+    protected override void OnInitialized()
     {
         _previousUrl = navigationManager.Uri;
 
@@ -38,34 +38,38 @@
 
     #region --Methods
 
-    void CreateUser()
+    async Task SubmitUser()
     {
         if (Id is null)
-            _EmployeeRepository.CreateEmployees(_entityRequest);
+            await _EmployeeRepository.CreateEmployees(_entityRequest);
         else
-            _EmployeeRepository.UpdateEmployees(_entityRequest, Id ?? new Guid());
+            await _EmployeeRepository.UpdateEmployees(_entityRequest, Id ?? new Guid());
 
         if (string.IsNullOrEmpty(_previousUrl))
             navigationManager.NavigateTo(_previousUrl);
         else
         {
-            navigationManager.NavigateTo("/Clients");
+            navigationManager.NavigateTo("/Users");
         }
     }
 
     void DeleteUser()
     {
-        _ClientsRepository.DeleteClients(Id ?? new Guid());
-        navigationManager.NavigateTo("/Clients");
+        _EmployeeRepository.DeleteEmployees(Id ?? new Guid());
+        navigationManager.NavigateTo("/Users");
     }
 
     async void GetUserById()
     {
-        GetClientResponse result = await _ClientsRepository.GetClientsById(new(Id ?? new Guid()));
+        GetEmployeeResponse result = await _EmployeeRepository.GetEmployeesById(new(Id ?? new Guid()));
         _entityRequest = _entityRequest with
         {
-            Phone = result.Phone,
             Name = result.Name,
+            CPF = result.CPF,
+            SimultaneousServices = result.SimultaneousServices,
+            Email = result.Email,
+            CorporateEmail = result.CorporateEmail,
+            Phone = result.Phone,
         };
         StateHasChanged();
     }
@@ -142,7 +146,7 @@
                     ValueInput="@_entityRequest.CorporateEmail"
                     ValueChangedCallback="@(s => _entityRequest = _entityRequest with { CorporateEmail = s })"/>
             </div>
-            
+
             @if (Id == null)
             {
                 <div class="md:col-span-3">
@@ -182,7 +186,7 @@
                         Id="Submit"
                         Label="Submit"
                         Name="Submit"
-                        ValueChangedCallback="CreateUser"/>
+                        ValueChangedCallback="SubmitUser"/>
                 </div>
             </div>
 

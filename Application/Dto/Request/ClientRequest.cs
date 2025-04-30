@@ -15,5 +15,5 @@ public record ClientRequest(
     int? Number,
     string? Neighborhood,
     string? Complement,
-    List<ClientRequest>? Subordinates
+    List<Guid>? Subordinates
 );

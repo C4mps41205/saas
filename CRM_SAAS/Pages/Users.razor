@@ -1,6 +1,7 @@
 ﻿@page "/Users"
 @using System.Dynamic
 @using Application.Dto
+@using Application.Dto.Request
 @using Application.Dto.Response
 @using CRM_SAAS.Models
 
@@ -14,6 +15,7 @@
     public int Page { get; set; }
     public int PageSize { get; set; }
     public int TotalPages { get; set; }
+    public EmployeeRequest request = new(1, 10, 1);
 
     #endregion
 
@@ -44,27 +46,27 @@
 
         _EmployeeRepository.OnEmployeesCreated += async (_) =>
         {
-            await GetAllUsers();
+            await GetAllUsers(request);
             StateHasChanged();
         };
 
         _EmployeeRepository.OnEmployeeDeleted += async (_) =>
         {
-            await GetAllUsers();
+            await GetAllUsers(request);
             StateHasChanged();
         };
 
         await _EmployeeRepository.InitializeConnectionHubEmployee();
-        await GetAllUsers();
+        await GetAllUsers(request);
     }
 
     #endregion
 
     #region --Methods
 
-    async Task GetAllUsers()
+    async Task GetAllUsers(EmployeeRequest requestPage)
     {
-        PaginationDefault<GetEmployeeResponse> result = await _EmployeeRepository.GetPaginatedEmployees(new(1, 10, 1));
+        PaginationDefault<GetEmployeeResponse> result = await _EmployeeRepository.GetPaginatedEmployees(requestPage);
 
         Page = result.Page;
         PageSize = result.PageSize;
@@ -75,9 +77,10 @@
                 dynamic expando = new ExpandoObject();
                 var dict = (IDictionary<string, object>)expando;
 
+                dict["Id"] = Employee.Id;
                 dict["Name"] = Employee.Name;
                 dict["CPF"] = Employee.CPF;
-                dict["SimultaneousServices"] = Employee.SimultaneousServices;
+                dict["SimultaneousServices"] = Employee.SimultaneousServices.ToString();
                 dict["Email"] = Employee.Email;
                 dict["CorporateEmail"] = Employee.CorporateEmail;
                 dict["Phone"] = Employee.Phone;
@@ -115,5 +118,6 @@
     Data="_rows"
     Page="Page"
     PageSize="PageSize"
+    ButtonPage="(e) => GetAllUsers(request with {Page = e})"
     TotalPages="TotalPages"
 />

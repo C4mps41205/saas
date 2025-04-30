@@ -36,7 +36,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> optionsBuilder)
 
         modelBuilder
             .Entity<Card>()
-            .HasMany<Client>(c => c.Clients)
+            .HasMany(c => c.Clients)
             .WithMany();
         
         modelBuilder
@@ -46,5 +46,4 @@ public class AppDbContext(DbContextOptions<AppDbContext> optionsBuilder)
 
         #endregion
     }
-
 }

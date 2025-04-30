@@ -1,7 +1,4 @@
-﻿using CRM_SAAS.Services;
-using CRM_SAAS.Services.Repository;
-
-namespace CRM_SAAS.DependencyInjection;
+﻿namespace CRM_SAAS.DependencyInjection;
 
 public static class ClientDependencyInjection
 {

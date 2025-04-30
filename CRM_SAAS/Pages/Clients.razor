@@ -1,6 +1,7 @@
 ﻿@page "/Clients"
 @using System.Dynamic
 @using Application.Dto
+@using Application.Dto.Request
 @using Application.Dto.Response
 @using CRM_SAAS.Models
 
@@ -14,6 +15,7 @@
     public int Page { get; set; }
     public int PageSize { get; set; }
     public int TotalPages { get; set; }
+    public GetClientRequest request = new(1, 10, 1);
 
     #endregion
 
@@ -50,27 +52,27 @@
 
         _ClientsRepository.OnClientsCreated += async (_) =>
         {
-            await GetAllClients();
+            await GetAllClients(request);
             StateHasChanged();
         };
 
         _ClientsRepository.OnClientDeleted += async (_) =>
         {
-            await GetAllClients();
+            await GetAllClients(request);
             StateHasChanged();
         };
 
         await _ClientsRepository.InitializeConnectionHubClient();
-        await GetAllClients();
+        await GetAllClients(request);
     }
 
     #endregion
 
     #region --Methods
 
-    async Task GetAllClients()
+    async Task GetAllClients(GetClientRequest requestPage)
     {
-        PaginationDefault<GetClientResponse> result = await _ClientsRepository.GetPaginatedClients(new(1, 10, 1));
+        PaginationDefault<GetClientResponse> result = await _ClientsRepository.GetPaginatedClients(requestPage);
 
         Page = result.Page;
         PageSize = result.PageSize;
@@ -127,6 +129,7 @@
     IsLoading="IsLoading"
     Data="_rows"
     Page="Page"
+    ButtonPage="(e) => GetAllClients(request with {Page = e})"
     PageSize="PageSize"
     TotalPages="TotalPages"
 />

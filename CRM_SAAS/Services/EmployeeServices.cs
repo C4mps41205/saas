@@ -54,29 +54,32 @@ public class EmployeeServices(HttpClient httpClient) : IEmployeeRepository
                new();
     }
 
-    public async Task<bool> CreateEmployees(CreateEmployeeRequest request)
+    public async Task<GetEmployeeResponse> GetEmployeesById(GetEmployeeByIdRequest request)
     {
-        var response = await httpClient.PostAsJsonAsync("Employee/CreateEmployee", request);
-        return response.IsSuccessStatusCode;
+        return await httpClient.GetFromJsonAsync<GetEmployeeResponse>(
+            $"Employee/GetEmployeeById?Id={request.Id}");
     }
-
     #endregion
 
     #region --Actions
 
-    public Task<bool> UpdateEmployees(CreateEmployeeRequest request, Guid Id)
+    public async Task<bool> UpdateEmployees(CreateEmployeeRequest request, Guid id)
     {
-        throw new NotImplementedException();
+        var content = JsonContent.Create(request);
+        var response = await httpClient.PatchAsync($"Employee/UpdateEmployee?id={id}", content);
+        return response.IsSuccessStatusCode;
     }
 
-    public Task<HttpResponseMessage> DeleteEmployees(Guid Id)
+    public async Task<HttpResponseMessage> DeleteEmployees(Guid Id)
     {
-        throw new NotImplementedException();
+        return await httpClient.DeleteAsync(
+            $"Employee/DeleteEmployee?id={Id}");
     }
-
-    public Task<GetEmployeeResponse> GetEmployeesById(GetEmployeeByIdRequest request)
+    
+    public async Task<bool> CreateEmployees(CreateEmployeeRequest request)
     {
-        throw new NotImplementedException();
+        var response = await httpClient.PostAsJsonAsync("Employee/CreateEmployee", request);
+        return response.IsSuccessStatusCode;
     }
 
     #endregion

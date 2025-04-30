@@ -2,6 +2,6 @@
 
 public enum PersonType
 {
-    pf,
-    pj
+    Pf,
+    Pj
 }

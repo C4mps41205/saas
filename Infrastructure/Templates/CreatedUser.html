@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Conta criada com sucesso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f8fa;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #007bff;
+        }
+
+        .content p {
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff !important;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Bem-vindo ao CRM!</h1>
+    </div>
+
+    <div class="content">
+        <p>Olá {{Name}},</p>
+
+        <p>Sua conta foi criada com sucesso no nosso sistema CRM.</p>
+
+        <p>Aqui estão suas credenciais de acesso:</p>
+
+        <ul>
+            <li><strong>Usuário:</strong> {{Email}}</li>
+            <li><strong>Senha temporária:</strong> {{Password}}</li>
+        </ul>
+
+        <p>Recomendamos que você altere sua senha no primeiro login.</p>
+
+        <a class="cta-button" href="{{LinkERP}}" target="_blank">Acessar o CRM</a>
+    </div>
+
+    <div class="footer">
+        © {{Year}} - CRM | Todos os direitos reservados.
+    </div>
+</div>
+</body>
+</html>

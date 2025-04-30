@@ -23,12 +23,12 @@ public class EmployeeUsecase(IEmployeeRepository repository)
 
     #region --Actions
 
-    public EmployeeResponse CreateEmployee(CreateEmployeeRequest request)
+    public async Task<EmployeeResponse> CreateEmployee(CreateEmployeeRequest request)
     {
-        return repository.CreateEmployee(request);
+        return await repository.CreateEmployee(request);
     }
 
-    public bool UpdateEmployee(EmployeeRequest request, Guid id)
+    public bool UpdateEmployee(CreateEmployeeRequest request, Guid id)
     {
         return repository.UpdateEmployee(request, id);
     }

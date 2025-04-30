@@ -15,6 +15,7 @@ public class EmployeeMapper : IBaseMappper<EmployeeResponse, Employee, EmployeeR
     public EmployeeResponse ToDto(Employee input)
     {
         return new(
+            input.Id,
             input.Name,
             input.CPF,
             input.SimultaneousServices,

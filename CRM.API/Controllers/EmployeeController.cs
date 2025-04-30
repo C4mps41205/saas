@@ -59,7 +59,7 @@ public class EmployeeController(EmployeeUsecase usecase) : ControllerBase
     }    
     
     [HttpPatch("UpdateEmployee")]
-    public ActionResult Update([FromQuery] Guid id, [FromBody] EmployeeRequest request)
+    public ActionResult Update([FromQuery] Guid id, [FromBody] CreateEmployeeRequest request)
     {
         try
         {

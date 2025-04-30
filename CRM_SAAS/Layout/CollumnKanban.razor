@@ -1,0 +1,34 @@
+﻿@using System.Dynamic
+
+@code {
+    [Parameter] public string Name { get; set; }
+    [Parameter] public List<ExpandoObject> Cards { get; set; } = [];
+    [Parameter] public EventCallback<bool> ButtonClicked { get; set; }
+
+
+    private async Task SendAddButtonCallback()
+    {
+        await ButtonClicked.InvokeAsync(true);
+    }
+
+}
+
+<div class="bg-white rounded-md p-4 w-full">
+    <div class="flex justify-between">
+        <div>
+            @Name
+        </div>
+        <div>
+            <ButtonDefault
+                Id="ButtonSearchDefault"
+                Name="ButtonSearchDefault"
+                Label="+ Add"
+                ValueChangedCallback="SendAddButtonCallback"/>
+        </div>
+    </div>
+
+    @foreach (var card in Cards)
+    {
+        @card
+    }
+</div>
