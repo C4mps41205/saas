@@ -3,6 +3,7 @@
 public enum KanbanStatusCard
 {
     Active,
-    Inactive,
+    Progress,
     Completed,
+    Inactive,
 }

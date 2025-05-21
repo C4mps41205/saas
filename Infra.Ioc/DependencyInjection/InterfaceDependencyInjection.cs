@@ -14,6 +14,7 @@ public static class InterfaceDependencyInjection
 
         services.AddScoped<IClientsRepository, ClientAdapher>();
         services.AddScoped<IEmployeeRepository, EmployeeAdapher>();
+        services.AddScoped<IKanbanRepository, KanbanAdapther>();
 
         #endregion
 
@@ -21,6 +22,7 @@ public static class InterfaceDependencyInjection
 
         services.AddScoped<ClientsUsecase>();
         services.AddScoped<EmployeeUsecase>();
+        services.AddScoped<KanbanUsecase>();
 
         #endregion
 

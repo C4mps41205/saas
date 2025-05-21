@@ -370,3 +370,5 @@ C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\Microsoft.AspNetCore.H
 C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\Microsoft.AspNetCore.SignalR.Client.dll
 C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
 C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\System.Net.ServerSentEvents.dll
+C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\SHA256Hasher.dll

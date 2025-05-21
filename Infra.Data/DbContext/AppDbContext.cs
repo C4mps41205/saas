@@ -37,12 +37,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> optionsBuilder)
         modelBuilder
             .Entity<Card>()
             .HasMany(c => c.Clients)
-            .WithMany();
+            .WithMany(x => x.Cards);
         
         modelBuilder
             .Entity<Card>()
             .HasOne<Employee>(c => c.Employee)
-            .WithMany();
+            .WithMany(x => x.Cards);
 
         #endregion
     }

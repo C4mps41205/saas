@@ -12,4 +12,8 @@
       <ProjectReference Include="..\Infra.Data\Infra.Data.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="PasswordHasher.SHA256.ASP.NET.CORE.Identity" Version="1.0.1" />
+    </ItemGroup>
+
 </Project>
