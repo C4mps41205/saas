@@ -1,22 +1,94 @@
 ﻿@page "/Kanban"
+@using System.Dynamic
+@using Application.Dto.Response
+@using Domain.Enum
 
 @code {
 
-    IEnumerable<string> collumns = new[]
+    #region --Variables
+
+    private List<CardResponse> _cards = new();
+    private Dictionary<string, List<ExpandoObject>> Columns = new() { };
+
+    #endregion
+
+    #region --Base
+
+    protected override void OnInitialized()
     {
-        "Criado",
-        "Em processo",
-        "Em teste",
-        "Finalizado",
-    };
+        GetCards();
+
+        _KanbanRepository.OnCardDeleted += async (_) =>
+        {
+            GetCards();
+            StateHasChanged();
+        };
+        
+        _KanbanRepository.OnCardsCreated += async (_) =>
+        {
+            GetCards();
+            StateHasChanged();
+        };
+        
+        _KanbanRepository.OnCardsUpdated += async (_) =>
+        {
+            GetCards();
+            StateHasChanged();
+        };
+    }
+
+    #endregion
+
+    #region --Actions
+
+    async Task GetCards()
+    {
+        _cards = await _KanbanRepository.GetKanban(new(new DateTime(2023, 10, 1), new DateTime(2023, 10, 31)));
+        await CreateCollumns();
+        StateHasChanged();
+    }
+
+    private static ExpandoObject CreateCard(string title, string description, Guid id)
+    {
+        var card = new ExpandoObject();
+        var cardDictionary = (IDictionary<string, object>)card;
+        cardDictionary["Title"] = title;
+        cardDictionary["Description"] = description;
+        cardDictionary["Id"] = id;
+        return card;
+    }
+
+    async Task CreateCollumns()
+    {
+        Columns = new Dictionary<string, List<ExpandoObject>>()
+        {
+            {
+                "To Do", new List<ExpandoObject>(
+                    _cards.Where(x => x.KanbanStatusCard == KanbanStatusCard.Active).Select(x => CreateCard(x.Title, x.Description, x.Id))
+                )
+            },
+            {
+                "In Progress", new List<ExpandoObject>(
+                    _cards.Where(x => x.KanbanStatusCard == KanbanStatusCard.Progress).Select(x => CreateCard(x.Title, x.Description, x.Id))
+                )
+            },
+            {
+                "Done", new List<ExpandoObject>(
+                    _cards.Where(x => x.KanbanStatusCard == KanbanStatusCard.Completed).Select(x => CreateCard(x.Title, x.Description, x.Id))
+                )
+            }
+        };
+    }
+
+    private async Task HandleAddCard(string columnName)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    #endregion
 
 }
 
-<div class="flex justify-evenly gap-3" style="height: 100%">
-    @foreach (var collumn in collumns)
-    {
-        <CollumnKanban
-            Name="@collumn"
-        />
-    }
-</div>
+<CollumnKanban Name="Meu Kanban"
+               Columns="Columns"
+               OnAddCard="HandleAddCard"/>

@@ -57,7 +57,7 @@ public class EmployeeServices(HttpClient httpClient) : IEmployeeRepository
     public async Task<GetEmployeeResponse> GetEmployeesById(GetEmployeeByIdRequest request)
     {
         return await httpClient.GetFromJsonAsync<GetEmployeeResponse>(
-            $"Employee/GetEmployeeById?Id={request.Id}");
+            $"Employee/GetEmployeeById?Id={request.Id}") ?? new();
     }
     #endregion
 

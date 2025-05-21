@@ -1,10 +1,11 @@
 ﻿using Application.Dto.Request;
+using Application.Dto.Response;
 using Application.Mapper.Base;
 using Domain.Entitites;
 
 namespace Application.Mapper;
 
-public class CreateClientMapper: IBaseMappper<CreateClientResponse, Client, ClientRequest>
+public class CreateClientMapper : IBaseMappper<CreateClientResponse, Client, ClientRequest>
 {
     public Client ToEntity(ClientRequest input)
     {
@@ -40,20 +41,21 @@ public class CreateClientMapper: IBaseMappper<CreateClientResponse, Client, Clie
 
     public CreateClientResponse ToDto(Client input)
     {
-        return new(
-            input.Phone,
-            input.Name,
-            input.CpfCnpj,
-            input.PersonType,
-            input.Email,
-            input.BirthDate,
-            input.State,
-            input.City,
-            input.Cep,
-            input.Number,
-            input.Neighborhood,
-            input.Complement,
-            input.Subordinates.Select(ToDto).ToList()
-        );
+        return new()
+        {
+            Phone = input.Phone,
+            Name = input.Name,
+            CpfCnpj = input.CpfCnpj,
+            PersonType = input.PersonType,
+            Email = input.Email,
+            BirthDate = input.BirthDate,
+            State = input.State,
+            City = input.City,
+            Cep = input.Cep,
+            Number = input.Number,
+            Neighborhood = input.Neighborhood,
+            Complement = input.Complement,
+            Subordinates = input.Subordinates.Select(ToDto).ToList()
+        };
     }
 }

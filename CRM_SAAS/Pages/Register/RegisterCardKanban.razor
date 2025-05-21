@@ -1,0 +1,168 @@
+﻿@page "/RegisterCardKanban"
+@page "/UpdateCardKanban/{id:guid}"
+@using Application.Dto.Request
+@using Domain.Enum
+
+@code {
+
+    #region --Variables
+
+    [Parameter] public Guid? Id { get; set; }
+
+    CreateCardKanbanRequest _cardRequest = new(
+        "",
+        "",
+        KanbanStatusCard.Active,
+        new(),
+        new Guid("89c2d7f9-d985-44ac-03e7-08dd82812a43")
+    );
+    
+    // TODO: fazer autenticação E BOTAR O GUID DO USUÁRIO AQUI
+
+    private string? _previousUrl;
+
+    private List<string> ListOfEmployees = new();
+    private List<string> ListOfClients = new();
+
+    #endregion
+
+    #region --Base
+
+    protected override async Task OnInitializedAsync()
+    {
+        _previousUrl = navigationManager.Uri;
+
+        if (Id.HasValue)
+            await GetCardById();
+    }
+
+    #endregion
+
+    #region --Methods
+
+    async Task CreateOrUpdateCard()
+    {
+        if (Id is null)
+            await _KanbanRepository.CreateCard(_cardRequest);
+        else
+            await _KanbanRepository.UpdateCard(new(
+                Id ?? Guid.Empty,
+                _cardRequest.Title,
+                _cardRequest.Description,
+                _cardRequest.KanbanStatusCard,
+                _cardRequest.Clients,
+                Guid.Empty
+            ), Id ?? Guid.Empty);
+
+        if (!string.IsNullOrEmpty(_previousUrl))
+            navigationManager.NavigateTo(_previousUrl);
+        else
+            navigationManager.NavigateTo("/Kanban");
+    }
+
+    async Task GetCardById()
+    {
+        if (Id.HasValue)
+        {
+            var result = await _KanbanRepository.GetCardById(Id.Value);
+            _cardRequest = new CreateCardKanbanRequest(
+                result.Title,
+                result.Description,
+                result.KanbanStatusCard,
+                result.Clients,
+                result.Employee
+            );
+            StateHasChanged();
+        }
+    }
+
+    void OnSelectKanbanStatus(KanbanStatusCard status)
+    {
+        _cardRequest = _cardRequest with { KanbanStatusCard = status };
+    }
+
+    async Task DeleteCard()
+    {
+        if (Id is not null)
+            await _KanbanRepository.DeleteCard(Id.Value);
+
+        navigationManager.NavigateTo("/Kanban");
+    }
+
+    #endregion
+
+}
+
+<div class="bg-white rounded-md p-4 overflow-x-auto">
+    <div class="lg:col-span-2">
+        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+
+            <div class="md:col-span-3">
+                <InputDefault
+                    Id="Title"
+                    Label="Title"
+                    Placeholder="Card Title"
+                    Name="Title"
+                    Type="Text"
+                    ValueInput="@_cardRequest.Title"
+                    ValueChangedCallback="@(s => _cardRequest = _cardRequest with { Title = s })"/>
+            </div>
+
+            <div class="md:col-span-5">
+                <TextareaDefault
+                    Id="Description"
+                    Label="Description"
+                    Placeholder="Enter the description..."
+                    Name="Description"
+                    ValueInput="@_cardRequest.Description"
+                    ValueChangedCallback="@(s => _cardRequest = _cardRequest with { Description = s })"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <SelectDefault
+                    Id="KanbanStatusCard"
+                    Label="Status"
+                    Items="@(Enum.GetValues<KanbanStatusCard>().Select(e => e.ToString()).ToList())"
+                    ValueInput="@_cardRequest.KanbanStatusCard.ToString()"
+                    ValueChangedCallback="@(s => OnSelectKanbanStatus(Enum.Parse<KanbanStatusCard>(s)))"/>
+            </div>
+
+            <div class="md:col-span-3">
+                <SelectDefault
+                    Id="Employee"
+                    Label="Assign to Employee"
+                    Items="ListOfEmployees"
+                    ValueInput="@_cardRequest.Employee.ToString()"
+                    ValueChangedCallback="@(s => _cardRequest = _cardRequest with { Employee = Guid.Parse(s) })"/>
+            </div>
+
+            <div class="md:col-span-5">
+                <MultiSelectDefault
+                    Id="Clients"
+                    Label="Clients"
+                    Items="ListOfClients"
+                    SelectedItems="@_cardRequest.Clients.Select(c => c.ToString()).ToList()"
+                    ValueChangedCallback="@(selectedItems => _cardRequest = _cardRequest with { Clients = selectedItems.Select(Guid.Parse).ToList() })"/>
+            </div>
+
+            <div class="md:col-span-5 text-right">
+                <div class="inline-flex items-end m-2">
+                    @if (Id is not null)
+                    {
+                        <ButtonDefault
+                            Id="Delete"
+                            Label="Delete"
+                            Name="Delete"
+                            ValueChangedCallback="DeleteCard"/>
+                    }
+
+                    <ButtonDefault
+                        Id="Submit"
+                        Label="Submit"
+                        Name="Submit"
+                        ValueChangedCallback="CreateOrUpdateCard"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

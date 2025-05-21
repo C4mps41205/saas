@@ -1,7 +1,8 @@
 ﻿namespace Application.Dto.Response;
 
-public record CreateEmployeeResponse(
-    string Name,
-    int SimultaneousServices,
-    string Photo
-);
+public class CreateEmployeeResponse()
+{
+    public string Name { get; set; }
+    public int SimultaneousServices { get; set; }
+    public string Photo { get; set; }
+};

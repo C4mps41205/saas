@@ -14,21 +14,22 @@ public class ClientsMapper : IBaseMappper<GetClientResponse, Client, GetClientRe
 
     public GetClientResponse ToDto(Client input)
     {
-        return new(
-            input.Id,
-            input.Phone,
-            input.Name,
-            input.CpfCnpj,
-            input.PersonType,
-            input.Email,
-            input.BirthDate,
-            input.State,
-            input.City,
-            input.Cep,
-            input.Number,
-            input.Neighborhood,
-            input.Complement,
-            input.Subordinates.Select(ToDto).ToList()
-        );
+        return new()
+        {
+            Id = input.Id,
+            Phone = input.Phone,
+            Name = input.Name,
+            CpfCnpj = input.CpfCnpj,
+            PersonType = input.PersonType,
+            Email = input.Email,
+            BirthDate = input.BirthDate,
+            State = input.State,
+            City = input.City,
+            Cep = input.Cep,
+            Number = input.Number,
+            Neighborhood = input.Neighborhood,
+            Complement = input.Complement,
+            Subordinates = input.Subordinates.Select(ToDto).ToList()
+        };
     }
 }

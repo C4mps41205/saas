@@ -13,5 +13,10 @@ public static class ClientDependencyInjection
         {
             client.BaseAddress = new Uri("http://localhost:5159/");
         });
+        
+        services.AddHttpClient<IKanbanRepository, KanbanServices>(client =>
+        {
+            client.BaseAddress = new Uri("http://localhost:5159/");
+        });
     }
 }

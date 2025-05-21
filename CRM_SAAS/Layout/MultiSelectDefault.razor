@@ -1,0 +1,85 @@
+﻿@code {
+    [Parameter] public required string Id { get; set; }
+    [Parameter] public required string Label { get; set; }
+    [Parameter] public List<string> SelectedItems { get; set; } = new();
+    [Parameter] public IEnumerable<string> Items { get; set; } = Enumerable.Empty<string>();
+    [Parameter] public string Placeholder { get; set; } = "Select options...";
+    [Parameter] public bool IsDisabled { get; set; } = false;
+    [Parameter] public bool Required { get; set; } = false;
+    [Parameter] public EventCallback<List<string>> ValueChangedCallback { get; set; }
+
+    private bool IsDropdownVisible { get; set; }
+    private string SearchTerm { get; set; } = string.Empty;
+
+    private async Task ToggleDropdown()
+    {
+        IsDropdownVisible = !IsDropdownVisible;
+    }
+
+    private async Task SelectItem(string item)
+    {
+        if (!SelectedItems.Contains(item))
+        {
+            SelectedItems.Add(item);
+            await ValueChangedCallback.InvokeAsync(SelectedItems);
+        }
+    }
+
+    private async Task RemoveItem(string item)
+    {
+        if (SelectedItems.Contains(item))
+        {
+            SelectedItems.Remove(item);
+            await ValueChangedCallback.InvokeAsync(SelectedItems);
+        }
+    }
+
+    private IEnumerable<string> FilteredItems => string.IsNullOrWhiteSpace(SearchTerm)
+        ? Items.Except(SelectedItems)
+        : Items.Where(i => i.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).Except(SelectedItems);
+}
+
+<label for="@Id" class="block text-sm font-medium leading-5 text-gray-700">@Label</label>
+<div class="relative">
+    <div class="border rounded-md px-3 py-2 bg-white focus-within:ring-1 focus-within:ring-blue-500 focus-within:border-blue-500">
+        <div class="flex flex-wrap gap-2">
+            @foreach (var selected in SelectedItems)
+            {
+                <span class="bg-blue-500 text-white px-2 py-1 rounded-md flex items-center">
+                    @selected
+                    <button type="button" @onclick="() => RemoveItem(selected)" class="ml-2">
+                        ✖
+                    </button>
+                </span>
+            }
+
+            <input
+                type="text"
+                placeholder="@Placeholder"
+                @bind="SearchTerm"
+                @onfocus="@(() => IsDropdownVisible = true)"
+                class="focus:outline-none flex-grow"
+                disabled="@IsDisabled" />
+        </div>
+    </div>
+
+    @if (IsDropdownVisible)
+    {
+        <ul class="absolute z-10 bg-white border mt-1 max-h-48 overflow-auto shadow-md w-full rounded-md">
+            @if (!FilteredItems.Any())
+            {
+                <li class="px-4 py-2 text-gray-500">No results found</li>
+            }
+            else
+            {
+                @foreach (var item in FilteredItems)
+                {
+                    <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                        @onclick="() => SelectItem(item)">
+                        @item
+                    </li>
+                }
+            }
+        </ul>
+    }
+</div>

@@ -1,0 +1,55 @@
+﻿@code {
+    [Parameter] public required string Id { get; set; }
+    [Parameter] public required string Label { get; set; }
+    [Parameter] public string Placeholder { get; set; } = "Enter text here...";
+    [Parameter] public bool Required { get; set; } = false;
+    [Parameter] public required string Name { get; set; }
+    [Parameter] public string ValueInput { get; set; } = string.Empty;
+    [Parameter] public bool IsDisabled { get; set; } = false;
+    [Parameter] public bool ShowLabel { get; set; } = true;
+    [Parameter] public EventCallback<string> ValueChangedCallback { get; set; }
+    [Parameter] public int Rows { get; set; } = 3;
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        string newValue = e.Value?.ToString() ?? string.Empty;
+        if (ValueInput != newValue)
+        {
+            ValueInput = newValue;
+            await ValueChangedCallback.InvokeAsync(ValueInput);
+        }
+    }
+}
+
+@if (ShowLabel)
+{
+    <label for="@Id" class="block text-sm font-medium leading-5 text-gray-700">@Label</label>
+}
+<div class="relative">
+    <textarea
+        id="@Id"
+        name="@Name"
+        placeholder="@Placeholder"
+        @oninput="HandleInput"
+        rows="@Rows"
+        required="@Required"
+        disabled="@IsDisabled"
+        class="appearance-none
+            block
+            w-full
+            px-3
+            py-2
+            border
+            border-gray-300
+            rounded-md
+            placeholder-gray-400
+            focus:outline-none
+            focus:ring-blue-500
+            focus:border-blue-500
+            transition
+            duration-150
+            ease-in-out
+            sm:text-sm">
+        @ValueInput
+    </textarea>
+</div>

@@ -14,14 +14,15 @@ public class EmployeeMapper : IBaseMappper<EmployeeResponse, Employee, EmployeeR
 
     public EmployeeResponse ToDto(Employee input)
     {
-        return new(
-            input.Id,
-            input.Name,
-            input.CPF,
-            input.SimultaneousServices,
-            input.Email,
-            input.CorporateEmail,
-            input.Phone
-        );
+        return new()
+        {
+            Id = input.Id,
+            Name = input.Name,
+            CPF = input.CPF,
+            SimultaneousServices = input.SimultaneousServices,
+            Email = input.Email,
+            CorporateEmail = input.CorporateEmail,
+            Phone = input.Phone
+        };
     }
 }

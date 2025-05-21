@@ -1,6 +1,3 @@
 ﻿namespace Application.Dto.Response;
 
-public class GetUserResponse
-{
-    
-}
+public class GetUserResponse;

@@ -1,0 +1,67 @@
+﻿@code {
+    [Parameter] public required string Id { get; set; }
+    [Parameter] public required string Label { get; set; }
+    [Parameter] public string Placeholder { get; set; } = null!;
+    [Parameter] public bool Required { get; set; } = false;
+    [Parameter] public required string Name { get; set; }
+    [Parameter] public string ValueInput { get; set; } = string.Empty;
+    [Parameter] public bool IsDisabled { get; set; } = false;
+    [Parameter] public bool ShowLabel { get; set; } = true;
+    [Parameter] public required IEnumerable<string> Items { get; set; }
+    [Parameter] public EventCallback<string> ValueChangedCallback { get; set; }
+
+    private async Task HandleChange(ChangeEventArgs e)
+    {
+        string newValue = e.Value?.ToString() ?? string.Empty;
+        if (ValueInput != newValue)
+        {
+            ValueInput = newValue;
+            await ValueChangedCallback.InvokeAsync(ValueInput);
+        }
+    }
+}
+
+@if (ShowLabel)
+{
+    <label for="@Id" class="block text-sm font-medium leading-5 text-gray-700">@Label</label>
+}
+<div class="relative">
+    <select
+        id="@Id"
+        name="@Name"
+        @onchange="HandleChange"
+        disabled="@IsDisabled"
+        required="@Required"
+        class="appearance-none
+            block
+            w-full
+            px-3
+            py-2
+            border
+            border-gray-300
+            rounded-md
+            bg-white
+            text-gray-900
+            placeholder-gray-400
+            focus:outline-none
+            focus:ring-blue-500
+            focus:border-blue-500
+            transition
+            duration-150
+            ease-in-out
+            sm:text-sm
+            sm:leading-5">
+
+        @if (!string.IsNullOrEmpty(Placeholder))
+        {
+            <option disabled selected hidden>@Placeholder</option>
+        }
+
+        @foreach (var item in Items)
+        {
+            <option selected="@(ValueInput == item)" value="@item">
+                @item
+            </option>
+        }
+    </select>
+</div>

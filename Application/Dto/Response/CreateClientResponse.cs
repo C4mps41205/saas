@@ -1,19 +1,20 @@
 ﻿using Domain.Enum;
 
-namespace Application.Dto.Request;
+namespace Application.Dto.Response;
 
-public record CreateClientResponse(
-    string Phone,
-    string Name,
-    string CpfCnpj,
-    PersonType PersonType,
-    string Email,
-    DateTime BirthDate,
-    State? State,
-    string? City,
-    string? Cep,
-    int? Number,
-    string? Neighborhood,
-    string? Complement,
-    List<CreateClientResponse> Subordinates 
-        );
+public class CreateClientResponse()
+{
+    public string Phone { get; set; }
+    public string Name { get; set; }
+    public string CpfCnpj { get; set; }
+    public PersonType PersonType { get; set; }
+    public string Email { get; set; }
+    public DateTime BirthDate { get; set; }
+    public State? State { get; set; }
+    public string? City { get; set; }
+    public string? Cep { get; set; }
+    public int? Number { get; set; }
+    public string? Neighborhood { get; set; }
+    public string? Complement { get; set; }
+    public List<CreateClientResponse> Subordinates { get; set; }
+};
