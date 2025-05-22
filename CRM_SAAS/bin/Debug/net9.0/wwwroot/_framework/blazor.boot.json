@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "CRM_SAAS",
   "resources": {
-    "hash": "sha256-mmhbzaiykSGS50eZRgQKAmipGVIdctMYkaxOEK/GYg0=",
+    "hash": "sha256-RP/d3P2ObhuPcev+SpUDZcP4OOxblGhVXTRWeUAkfzY=",
     "fingerprinting": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
       "Microsoft.AspNetCore.Authentication.Abstractions.teru10q8m9.wasm": "Microsoft.AspNetCore.Authentication.Abstractions.wasm",
@@ -61,6 +61,7 @@
       "Microsoft.JSInterop.WebAssembly.vzj7d1zf5j.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
       "Microsoft.Net.Http.Headers.vhfw8f9f40.wasm": "Microsoft.Net.Http.Headers.wasm",
       "Newtonsoft.Json.mvfxwucme5.wasm": "Newtonsoft.Json.wasm",
+      "PSC.Blazor.Components.Chartjs.pm0gzhex7r.wasm": "PSC.Blazor.Components.Chartjs.wasm",
       "System.IdentityModel.Tokens.Jwt.e12aoin6r0.wasm": "System.IdentityModel.Tokens.Jwt.wasm",
       "System.Net.ServerSentEvents.f1hncm5urj.wasm": "System.Net.ServerSentEvents.wasm",
       "System.Net.WebSockets.WebSocketProtocol.pp9fi4k4ch.wasm": "System.Net.WebSockets.WebSocketProtocol.wasm",
@@ -240,12 +241,12 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "Application.2zvh15u3n9.wasm": "Application.wasm",
-      "Domain.lqkqofxoe1.wasm": "Domain.wasm",
-      "Application.79ga4iei65.pdb": "Application.pdb",
-      "Domain.rq3s8nwily.pdb": "Domain.pdb",
-      "CRM_SAAS.u7jwnz3pzx.wasm": "CRM_SAAS.wasm",
-      "CRM_SAAS.eccf2uw1xn.pdb": "CRM_SAAS.pdb"
+      "Application.broybp5n0y.wasm": "Application.wasm",
+      "Domain.nbzexxisly.wasm": "Domain.wasm",
+      "Application.o19pcxg6yu.pdb": "Application.pdb",
+      "Domain.oun6y4x3u0.pdb": "Domain.pdb",
+      "CRM_SAAS.b8hbxc8yqi.wasm": "CRM_SAAS.wasm",
+      "CRM_SAAS.l83q0l9iyk.pdb": "CRM_SAAS.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.hmanx9razn.js": "sha256-d7UNSArplVrX3arY2Kmhxp1wN79ng8hLqIBrkiQ9Gbo="
@@ -324,6 +325,7 @@
       "Microsoft.JSInterop.WebAssembly.vzj7d1zf5j.wasm": "sha256-+yETq3HNwmgPEHJePavXqUT5HcOeuur5PgP7H5vXEa4=",
       "Microsoft.Net.Http.Headers.vhfw8f9f40.wasm": "sha256-jfXK+cfJd/PteHB+5Bay/NDY9b9VLvVw6G/Bm262Lpo=",
       "Newtonsoft.Json.mvfxwucme5.wasm": "sha256-Xpm0r0rXv22HXKAg/U0UjDqng/kTiYSPNONjhRP6sYE=",
+      "PSC.Blazor.Components.Chartjs.pm0gzhex7r.wasm": "sha256-MW5tpr3/7NNNQ2Y5HI5VIhGW7+sfezJSkGPTKvCH6SU=",
       "System.IdentityModel.Tokens.Jwt.e12aoin6r0.wasm": "sha256-LkeH1GARiiqgGgnujCqOhCWQCXAsYZiMfwYKrlO/4wY=",
       "System.Net.ServerSentEvents.f1hncm5urj.wasm": "sha256-/dVjeOnQfTThv99QbrOWRTb8nCD58p9mWX7b+ppD/lE=",
       "System.Net.WebSockets.WebSocketProtocol.pp9fi4k4ch.wasm": "sha256-7QCZJ6ac5ipkswOjd52pbpYLw0eDyeRmZPOYWDfDo2w=",
@@ -494,14 +496,14 @@
       "WindowsBase.377bly7twj.wasm": "sha256-0VmBdMjdc0nZGHDSfaGirT6y3mJTM0qx8eqCUC/rpiE=",
       "mscorlib.o0184ey5ia.wasm": "sha256-2GxNKZQJVJvYMUxSTuXa5V2qxawSMMHZtwG33SKVCZU=",
       "netstandard.hb3h2rr8mk.wasm": "sha256-DWn9+RH/ElZQ6imlYqVwZvir1KTzNwY18AzGmnyiymU=",
-      "Application.2zvh15u3n9.wasm": "sha256-4s6a2AkED8GwqFIh7qKQZZcQGUWa8sp86cq6pISJhdg=",
-      "Domain.lqkqofxoe1.wasm": "sha256-fa/ClTUr6VATQpG28UwOn3+dZz1EJKNzw5kF/eCGzFo=",
-      "CRM_SAAS.u7jwnz3pzx.wasm": "sha256-toPeeCEN1Ov+f48DldNvuiVrdtqBbJieQd5Yr0YkkDs="
+      "Application.broybp5n0y.wasm": "sha256-KU84K341nG2MJWs6dKtF4hma4IHg/LFVE6UMqpkno+s=",
+      "Domain.nbzexxisly.wasm": "sha256-U6/CzTqo/OsAQBTSVvAMtlEFkAI2HMJcGpSRco9QXKw=",
+      "CRM_SAAS.b8hbxc8yqi.wasm": "sha256-BWMLWqpuRhj7tDEDa74hVEDi5G6+YzfW+7YFIvla9Es="
     },
     "pdb": {
-      "Application.79ga4iei65.pdb": "sha256-NSO16p+OuQTM1XP3TeTw/rPyOtsrM4V7vP8jHfmHe2s=",
-      "Domain.rq3s8nwily.pdb": "sha256-Dbo6cUsjXz33N9950hUWsbhM6lXeJSp6U8Q9oWBE3xs=",
-      "CRM_SAAS.eccf2uw1xn.pdb": "sha256-wlnFQJkKxtaGHjdg+p7LSw2fRcrUHNb3i05rb1EdVPA="
+      "Application.o19pcxg6yu.pdb": "sha256-9NVKlpQMAh+Ksk5fj81tjegvlao8tmIIMYk6aWsHZC8=",
+      "Domain.oun6y4x3u0.pdb": "sha256-wH+P4aUcoLaWaKOVgZ3V5c1+vKoj4OQ1KB6iIupterE=",
+      "CRM_SAAS.l83q0l9iyk.pdb": "sha256-G+nDSnaEFCz62ajroCVY7br6OY1tJkbEAP17lsK4sQM="
     }
   },
   "cacheBootResources": true,

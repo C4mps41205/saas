@@ -172,6 +172,10 @@
               "version": "[9.0.0, )",
               "autoReferenced": true
             },
+            "PSC.Blazor.Components.Chartjs": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.8.0, )"

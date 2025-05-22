@@ -85,6 +85,11 @@
         };
         StateHasChanged();
     }
+    
+    void OnSelectStateStatus(State state)
+    {
+        _clientRequest = _clientRequest with { State = state };
+    }
 
     #endregion
 
@@ -128,12 +133,10 @@
             </div>
 
             <div class="md:col-span-2">
-                <InputDefault
-                    Id="PersonType"
+                <SelectDefault
+                    Id="KanbanStatusCard"
                     Label="Person Type"
-                    Placeholder=""
-                    Name="PersonType"
-                    Type="Text"
+                    Items="@(Enum.GetValues<PersonType>().Select(e => e.ToString()).ToList())"
                     ValueInput="@_clientRequest.PersonType.ToString()"
                     ValueChangedCallback="@(s => _clientRequest = _clientRequest with { PersonType = Enum.Parse<PersonType>(s) })"/>
             </div>
@@ -161,14 +164,12 @@
             </div>
 
             <div class="md:col-span-1">
-                <InputDefault
+                <SelectDefault
                     Id="State"
                     Label="State"
-                    Placeholder=""
-                    Name="State"
-                    Type="Text"
+                    Items="@(Enum.GetValues<State>().Select(e => e.ToString()).ToList())"
                     ValueInput="@_clientRequest.State?.ToString()"
-                    ValueChangedCallback="@(s => _clientRequest = _clientRequest with { State = Enum.TryParse<State>(s, out var val) ? val : null })"/>
+                    ValueChangedCallback="@(s => OnSelectStateStatus(Enum.Parse<State>(s)))"/>
             </div>
 
             <div class="md:col-span-2">

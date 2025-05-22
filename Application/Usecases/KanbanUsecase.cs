@@ -12,6 +12,11 @@ public class KanbanUsecase(IKanbanRepository repository)
     {
         return await repository.GetAllKanban();
     }
+    
+    public async Task<CardResponse> GetByIdKanban(GetCardByIdRequest request)
+    {
+        return await repository.GetById(request);
+    }
 
     #endregion
 

@@ -19,8 +19,6 @@
     
     // TODO: fazer autenticação E BOTAR O GUID DO USUÁRIO AQUI
 
-    private string? _previousUrl;
-
     private List<string> ListOfEmployees = new();
     private List<string> ListOfClients = new();
 
@@ -30,8 +28,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _previousUrl = navigationManager.Uri;
-
         if (Id.HasValue)
             await GetCardById();
     }
@@ -51,13 +47,10 @@
                 _cardRequest.Description,
                 _cardRequest.KanbanStatusCard,
                 _cardRequest.Clients,
-                Guid.Empty
+                new Guid("89c2d7f9-d985-44ac-03e7-08dd82812a43")
             ), Id ?? Guid.Empty);
 
-        if (!string.IsNullOrEmpty(_previousUrl))
-            navigationManager.NavigateTo(_previousUrl);
-        else
-            navigationManager.NavigateTo("/Kanban");
+        navigationManager.NavigateTo("/Kanban");
     }
 
     async Task GetCardById()

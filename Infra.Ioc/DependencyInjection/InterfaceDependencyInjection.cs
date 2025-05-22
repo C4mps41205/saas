@@ -2,6 +2,7 @@
 using Application.Usecases;
 using Infrastructure.Adapthers;
 using Infrastructure.Services;
+using Infrastructure.Utils;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infra.Ioc.DependencyInjection;
@@ -30,6 +31,10 @@ public static class InterfaceDependencyInjection
 
         services.AddScoped<IEmailService, EmailService>();
 
+        #endregion
+        
+        #region Utils
+        services.AddScoped<JwtUtil>();
         #endregion
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3Mf4riwwXZQ=",
+  "dgSpecHash": "ml5MfYwKlxo=",
   "success": true,
   "projectFilePath": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM.API\\CRM.API.csproj",
   "expectedPackageFiles": [
@@ -114,6 +114,7 @@
     "C:\\Users\\dev2\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\passwordhasher.sha256.asp.net.core.identity\\1.0.1\\passwordhasher.sha256.asp.net.core.identity.1.0.1.nupkg.sha512",
+    "C:\\Users\\dev2\\.nuget\\packages\\psc.blazor.components.chartjs\\8.0.8\\psc.blazor.components.chartjs.8.0.8.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\system.buffers\\4.6.0\\system.buffers.4.6.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\system.clientmodel\\1.0.0\\system.clientmodel.1.0.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "p/tk19JU9dQ=",
+  "dgSpecHash": "V26WRKis+Ns=",
   "success": true,
   "projectFilePath": "C:\\Users\\dev2\\RiderProjects\\saas\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -95,6 +95,7 @@
     "C:\\Users\\dev2\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\passwordhasher.sha256.asp.net.core.identity\\1.0.1\\passwordhasher.sha256.asp.net.core.identity.1.0.1.nupkg.sha512",
+    "C:\\Users\\dev2\\.nuget\\packages\\psc.blazor.components.chartjs\\8.0.8\\psc.blazor.components.chartjs.8.0.8.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\system.buffers\\4.6.0\\system.buffers.4.6.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\system.clientmodel\\1.0.0\\system.clientmodel.1.0.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\system.componentmodel.annotations\\4.5.0\\system.componentmodel.annotations.4.5.0.nupkg.sha512",

@@ -16,6 +16,13 @@ public class KanbanController(KanbanUsecase useCase) : ControllerBase
         var kanban = await useCase.GetAllKanban();
         return Ok(kanban);
     }
+    
+    [HttpGet("GetCardById")]
+    public async Task<IActionResult> GetCardById([FromQuery] GetCardByIdRequest request)
+    {
+        var kanban = await useCase.GetByIdKanban(request);
+        return Ok(kanban);
+    }
 
     #endregion
 

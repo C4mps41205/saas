@@ -17,6 +17,16 @@ public class EmployeeUsecase(IEmployeeRepository repository)
     public EmployeeResponse GetEmployeeById(GetEmployeeByIdRequest request)
     {
         return repository.GetEmployeeById(request);
+    }      
+    
+    public Task<AuthEmployeeResponse> Authenticate(AuthEmployeeRequest request)
+    {
+        return repository.Authenticate(request);
+    }       
+    
+    public Task<bool> ResetPassword(ResetPasswordRequest request)
+    {
+        return repository.ResetPassword(request);
     }   
 
     #endregion

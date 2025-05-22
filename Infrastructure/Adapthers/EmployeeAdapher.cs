@@ -6,6 +6,7 @@ using Application.Repository;
 using Domain.Entitites;
 using Infra.Data.DbContext;
 using Infrastructure.Hubs;
+using Infrastructure.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -17,9 +18,73 @@ public class EmployeeAdapher(
     AppDbContext appDbContext,
     IHubContext<EmployeeHub> hubContext,
     IEmailService emailService,
+    JwtUtil jwtUtils,
     IConfiguration configuration)
     : IEmployeeRepository
 {
+
+    #region --Auth
+
+    public Task<AuthEmployeeResponse> Authenticate(AuthEmployeeRequest request)
+    {
+        var user = appDbContext.Employees.SingleOrDefault(x => x.CorporateEmail == request.Email);
+
+        if (user == null)
+            throw new ApplicationException("Email or password is incorrect");
+
+        PasswordHasher<Employee> passwordHasher = new();
+
+        if (passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) !=
+            PasswordVerificationResult.Success)
+            throw new ApplicationException("Email or password is incorrect");
+        
+        var token = jwtUtils.GenerateToken(user.CorporateEmail);
+
+        return Task.FromResult(new AuthEmployeeResponse
+        {
+            Token = token,
+            Employee = new EmployeeMapper().ToDto(user)
+        });
+    }
+
+    public async Task<bool> ResetPassword(ResetPasswordRequest request)
+    {
+        var user = appDbContext.Employees.FirstOrDefault(x => x.Id == request.Id);
+        
+        if(user == null)
+            throw new ApplicationException("Email not found");
+        
+        PasswordHasher<Employee> passwordHasher = new();
+        
+        string passwordHash = passwordHasher.HashPassword(user, request.Password);
+        byte[] passwordSalt = Convert.FromBase64String(passwordHash);
+        
+        user.PasswordHash = passwordHash;
+        user.PasswordSalt = passwordSalt;
+        
+        appDbContext.SaveChanges();
+        
+        Dictionary<string, string> replacements = new Dictionary<string, string>()
+        {
+            { "Name", user.Name },
+            { "Email", user.CorporateEmail },
+            { "Password", request.Password },
+            { "LinkERP", configuration["FrontendUrl"] ?? throw new ArgumentNullException(nameof(configuration)) },
+            { "Year", new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString() }
+        };
+
+        string template =
+            await emailService.ReplaceEmailParams(
+                (configuration["TemplatesUrl"] ?? throw new ArgumentException($"Not found variable TemplatesUrl")),
+                "ResetPassword.html", replacements);
+        
+        emailService.Execute(template, "Your password has been updated", user.Email);
+        
+        return true;
+    }
+
+    #endregion
+    
     #region --Queries
 
     public Task<PaginationDefault<EmployeeResponse>> GetPaginatedEmployees(GetEmployeeRequest pagination)
@@ -51,7 +116,7 @@ public class EmployeeAdapher(
 
         return new EmployeeMapper().ToDto(client);
     }
-
+    
     #endregion
 
     #region --Actions
@@ -81,7 +146,9 @@ public class EmployeeAdapher(
         };
 
         string template =
-            await emailService.ReplaceEmailParams((configuration["TemplatesUrl"] ?? throw new ArgumentException($"Not found variable TemplatesUrl")), "CreatedUser.html", replacements);
+            await emailService.ReplaceEmailParams(
+                (configuration["TemplatesUrl"] ?? throw new ArgumentException($"Not found variable TemplatesUrl")),
+                "CreatedUser.html", replacements);
         emailService.Execute(template, "New user created", newEmployee.Email);
 
         var dto = new CreateEmployeeMapper().ToDto(createdCategory.Entity);
@@ -92,8 +159,8 @@ public class EmployeeAdapher(
     public bool UpdateEmployee(CreateEmployeeRequest employeeDto, Guid id)
     {
         var employee = appDbContext.Employees.Find(id);
-        
-        if(employee == null)
+
+        if (employee == null)
             throw new ApplicationException("Employee not found");
 
         employee.Name = employeeDto.Name;
@@ -102,9 +169,9 @@ public class EmployeeAdapher(
         employee.Email = employeeDto.Email;
         employee.CorporateEmail = employeeDto.CorporateEmail;
         employee.Phone = employeeDto.Phone;
-        
+
         appDbContext.SaveChanges();
-        
+
         hubContext.Clients.All.SendAsync("EmployeeUpdated", new EmployeeMapper().ToDto(employee));
         return true;
     }

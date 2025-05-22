@@ -1308,6 +1308,17 @@
           }
         }
       },
+      "PSC.Blazor.Components.Chartjs/8.0.8": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "9.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/PSC.Blazor.Components.Chartjs.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "System.Buffers/4.6.0": {},
       "System.ClientModel/1.0.0": {
         "dependencies": {
@@ -1598,6 +1609,7 @@
           "Microsoft.AspNetCore.SignalR.Client": "9.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
           "Microsoft.Extensions.Http": "9.0.0",
+          "PSC.Blazor.Components.Chartjs": "8.0.8",
           "System.IdentityModel.Tokens.Jwt": "8.8.0"
         },
         "runtime": {
@@ -2434,6 +2446,13 @@
       "sha512": "sha512-Bv3dRpT855w1TCZE+D2yhFbK4K5J048ZFjbQgU+upZiEf7HWH/wQTkkjER3/8nxHnXt902WiiXRDBcANbDLyvw==",
       "path": "passwordhasher.sha256.asp.net.core.identity/1.0.1",
       "hashPath": "passwordhasher.sha256.asp.net.core.identity.1.0.1.nupkg.sha512"
+    },
+    "PSC.Blazor.Components.Chartjs/8.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-N5P5DaddtBmmdpd96t3PQ2td9VUmTZM0VjMWBAuApJGS6QWjwAavRaKZ/jwcuQVk8uajf1/DmR3lWjyAFABtAQ==",
+      "path": "psc.blazor.components.chartjs/8.0.8",
+      "hashPath": "psc.blazor.components.chartjs.8.0.8.nupkg.sha512"
     },
     "System.Buffers/4.6.0": {
       "type": "package",

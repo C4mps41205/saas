@@ -10,6 +10,41 @@ namespace CRM.API.Controllers;
 [Route("[controller]")]
 public class EmployeeController(EmployeeUsecase usecase) : ControllerBase
 {
+    #region --Authenticate User
+
+    [HttpPost("Authenticate")]
+    public async Task<ActionResult> Authenticate([FromBody] AuthEmployeeRequest request)
+    {
+        try
+        {
+            AuthEmployeeResponse response = await usecase.Authenticate(request);
+            return Ok(response);
+        }   
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPost("ResetPassword")]
+    public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+    {
+        try
+        {
+            bool response = await usecase.ResetPassword(request);
+            return Ok(response);
+        }   
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    #endregion
+    
+    
+    
+    
     #region --Queries
 
     [HttpGet("GetPaginatedEmployees")]
@@ -38,7 +73,7 @@ public class EmployeeController(EmployeeUsecase usecase) : ControllerBase
         {
             return BadRequest(e.Message);
         }
-    }   
+    }
 
     #endregion
 

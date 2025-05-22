@@ -1,24 +1,63 @@
 ﻿@page "/Dashboard"
+
 <h3>Dashboard</h3>
 
 @code {
+    private DoughnutChartConfig? _config1;
+    private Chart? _chart1;
+    public readonly List<string> SimplePieText = new() { "Red", "Blue", "Yellow" };
+    public readonly List<decimal?> SimplePie = new() { 300, 50, 100 };
+
+
+    protected override void OnInitialized()
+    {
+        _config1 = new DoughnutChartConfig()
+        {
+            Options = new Options()
+            {
+                Responsive = true,
+                MaintainAspectRatio = false,
+                Plugins = new Plugins()
+                {
+                    Legend = new Legend()
+                    {
+                        Display = true,
+                        Position = LegendPosition.Left
+                    }
+                }
+            }
+        };
+
+        _config1.Data.Labels = SimplePieText;
+        _config1.Data.Datasets.Add(new DoughnutDataset()
+        {
+            Label = "My First Dataset",
+            Data = SimplePie,
+            BackgroundColor = new List<string>() { "red", "blue", "yellow" },
+            HoverOffset = 4
+        });
+    }
+
 }
 
-
 <div class="flex justify-evenly gap-3">
+
+
     <div class="bg-white rounded-md p-4 w-full">
-        grafico um
+        <Chart @ref="_chart1" Config="_config1"></Chart>
     </div>
 
     <div class="bg-white rounded-md p-4 w-full">
-        grafico um
+        <Chart @ref="_chart1" Config="_config1"></Chart>
+
     </div>
 
     <div class="bg-white rounded-md p-4 w-full">
-        grafico um
+        <Chart @ref="_chart1" Config="_config1"></Chart>
+
     </div>
 
     <div class="bg-white rounded-md p-4 w-full">
-        grafico um
+        <Chart @ref="_chart1" Config="_config1"></Chart>
     </div>
 </div>

@@ -14,26 +14,26 @@ public class KanbanServices(HttpClient httpClient) : IKanbanRepository
     
     #region --Hub
 
-    public async Task InitializeConnectionHubEmployee()
+    public async Task InitializeConnectionHubKanban()
     {
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl("http://localhost:5159/EmployeeHub")
+            .WithUrl("http://localhost:5159/KanbanHub")
             .WithAutomaticReconnect()
             .Build();
 
-        _hubConnection.On<bool>("EmployeeCreated", (e) =>
+        _hubConnection.On<bool>("CreatedCardKanban", (e) =>
         {
             OnCardsCreated?.Invoke(e);
         });
         
-        _hubConnection.On<bool>("EmployeeCreated", (e) =>
+        _hubConnection.On<bool>("UpdatedCardKanban", (e) =>
         {
             OnCardsUpdated?.Invoke(e);
         });
         
-        _hubConnection.On<bool>("EmployeeDeleted", (client) =>
+        _hubConnection.On<bool>("DeletedCardKanban", (e) =>
         {
-            OnCardDeleted?.Invoke(client);
+            OnCardDeleted?.Invoke(e);
         });
 
         await _hubConnection.StartAsync();
@@ -77,7 +77,7 @@ public class KanbanServices(HttpClient httpClient) : IKanbanRepository
     public async Task<bool> UpdateCard(UpdateCardKanbanRequest request, Guid id)
     {
         var content = JsonContent.Create(request);
-        var response = await httpClient.PatchAsync($"Kanban/UpdateCard?id={id}", content);
+        var response = await httpClient.PutAsync($"Kanban/UpdateCard?id={id}", content);
         return response.IsSuccessStatusCode;
     }
     

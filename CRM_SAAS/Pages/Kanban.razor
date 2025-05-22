@@ -9,32 +9,37 @@
 
     private List<CardResponse> _cards = new();
     private Dictionary<string, List<ExpandoObject>> Columns = new() { };
+    private bool IsLoading { get; set; } = true;
 
     #endregion
 
     #region --Base
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        GetCards();
 
         _KanbanRepository.OnCardDeleted += async (_) =>
         {
-            GetCards();
+            await GetCards();
             StateHasChanged();
         };
         
         _KanbanRepository.OnCardsCreated += async (_) =>
         {
-            GetCards();
+            await GetCards();
             StateHasChanged();
         };
         
         _KanbanRepository.OnCardsUpdated += async (_) =>
         {
-            GetCards();
-            StateHasChanged();
+            Console.WriteLine("dsfçajfdçlasfd");
+            await GetCards();
+            await InvokeAsync(StateHasChanged);
         };
+
+        await _KanbanRepository.InitializeConnectionHubKanban();
+        await GetCards();
+
     }
 
     #endregion
@@ -78,6 +83,8 @@
                 )
             }
         };
+        await Task.Delay(1000);
+        IsLoading = false;
     }
 
     private async Task HandleAddCard(string columnName)
@@ -91,4 +98,5 @@
 
 <CollumnKanban Name="Meu Kanban"
                Columns="Columns"
+               IsLoading="IsLoading"
                OnAddCard="HandleAddCard"/>

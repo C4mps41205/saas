@@ -8,5 +8,6 @@ internal static class ControllerSignalR
     {
         app.MapHub<ClientHub>("/ClientsHub");
         app.MapHub<EmployeeHub>("/EmployeeHub");
+        app.MapHub<CardHub>("/KanbanHub");
     }
 }
