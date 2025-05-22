@@ -415,3 +415,6 @@ C:\Users\dev2\RiderProjects\saas\CRM.API\obj\Debug\net9.0\compressed\xuz06kjuf4-
 C:\Users\dev2\RiderProjects\saas\CRM.API\obj\Debug\net9.0\compressed\gezfqygmjx-cg501lde2e.gz
 C:\Users\dev2\RiderProjects\saas\CRM.API\obj\Debug\net9.0\compressed\wbtgb4fg76-l4cajhyz70.gz
 C:\Users\dev2\RiderProjects\saas\CRM.API\obj\Debug\net9.0\compressed\4azs3upcts-wbjos7lhw0.gz
+C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\FluentValidation.dll
+C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\FluentValidation.AspNetCore.dll
+C:\Users\dev2\RiderProjects\saas\CRM.API\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll

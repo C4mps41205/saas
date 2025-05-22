@@ -1,9 +1,10 @@
 {
   "mainAssemblyName": "CRM_SAAS",
   "resources": {
-    "hash": "sha256-RP/d3P2ObhuPcev+SpUDZcP4OOxblGhVXTRWeUAkfzY=",
+    "hash": "sha256-Kh61AS05L6GnZKxIn3twNLoL9DbhBqQMEpmOKSn2QP0=",
     "fingerprinting": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
+      "FluentValidation.b28mz0qrx7.wasm": "FluentValidation.wasm",
       "Microsoft.AspNetCore.Authentication.Abstractions.teru10q8m9.wasm": "Microsoft.AspNetCore.Authentication.Abstractions.wasm",
       "Microsoft.AspNetCore.Authorization.esv38zo127.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Authorization.Policy.tnvtbz267h.wasm": "Microsoft.AspNetCore.Authorization.Policy.wasm",
@@ -241,12 +242,12 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "Application.broybp5n0y.wasm": "Application.wasm",
-      "Domain.nbzexxisly.wasm": "Domain.wasm",
-      "Application.o19pcxg6yu.pdb": "Application.pdb",
-      "Domain.oun6y4x3u0.pdb": "Domain.pdb",
-      "CRM_SAAS.b8hbxc8yqi.wasm": "CRM_SAAS.wasm",
-      "CRM_SAAS.l83q0l9iyk.pdb": "CRM_SAAS.pdb"
+      "Application.qxmy18iarm.wasm": "Application.wasm",
+      "Domain.0cohory2ya.wasm": "Domain.wasm",
+      "Application.1ewgv9k28k.pdb": "Application.pdb",
+      "Domain.uxgnr6s99v.pdb": "Domain.pdb",
+      "CRM_SAAS.cg897tkplm.wasm": "CRM_SAAS.wasm",
+      "CRM_SAAS.v6f1ayxm25.pdb": "CRM_SAAS.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.hmanx9razn.js": "sha256-d7UNSArplVrX3arY2Kmhxp1wN79ng8hLqIBrkiQ9Gbo="
@@ -268,6 +269,7 @@
     },
     "assembly": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
+      "FluentValidation.b28mz0qrx7.wasm": "sha256-UzXm5ONFC2YfuSahJleOJiIJNURatHcRQIkXq2hoPew=",
       "Microsoft.AspNetCore.Authentication.Abstractions.teru10q8m9.wasm": "sha256-u9iMOIltdEH1f+auTSi7mcb4SBt2memdjfBRiDl2cNE=",
       "Microsoft.AspNetCore.Authorization.esv38zo127.wasm": "sha256-rvfJ4vWD9REicee49XUtbmMWVdG0gSGCfb9oZFv9gkY=",
       "Microsoft.AspNetCore.Authorization.Policy.tnvtbz267h.wasm": "sha256-d8NNLZQJd+CbQtkhk8YaiPHZQZb7dW9dVfxbbJXDKIw=",
@@ -496,14 +498,14 @@
       "WindowsBase.377bly7twj.wasm": "sha256-0VmBdMjdc0nZGHDSfaGirT6y3mJTM0qx8eqCUC/rpiE=",
       "mscorlib.o0184ey5ia.wasm": "sha256-2GxNKZQJVJvYMUxSTuXa5V2qxawSMMHZtwG33SKVCZU=",
       "netstandard.hb3h2rr8mk.wasm": "sha256-DWn9+RH/ElZQ6imlYqVwZvir1KTzNwY18AzGmnyiymU=",
-      "Application.broybp5n0y.wasm": "sha256-KU84K341nG2MJWs6dKtF4hma4IHg/LFVE6UMqpkno+s=",
-      "Domain.nbzexxisly.wasm": "sha256-U6/CzTqo/OsAQBTSVvAMtlEFkAI2HMJcGpSRco9QXKw=",
-      "CRM_SAAS.b8hbxc8yqi.wasm": "sha256-BWMLWqpuRhj7tDEDa74hVEDi5G6+YzfW+7YFIvla9Es="
+      "Application.qxmy18iarm.wasm": "sha256-ngn4pA2xDDBwqcrbB+fbyQxT3g0b5PkHhquqTWWgbkU=",
+      "Domain.0cohory2ya.wasm": "sha256-kGamnJu0fFXmv1hQ21l53osD9OhqJHen7IxB6qdGTlw=",
+      "CRM_SAAS.cg897tkplm.wasm": "sha256-9PFCoPErX9y2YPZUZGBv7z4zlUec+aQukoBXzhOvuGU="
     },
     "pdb": {
-      "Application.o19pcxg6yu.pdb": "sha256-9NVKlpQMAh+Ksk5fj81tjegvlao8tmIIMYk6aWsHZC8=",
-      "Domain.oun6y4x3u0.pdb": "sha256-wH+P4aUcoLaWaKOVgZ3V5c1+vKoj4OQ1KB6iIupterE=",
-      "CRM_SAAS.l83q0l9iyk.pdb": "sha256-G+nDSnaEFCz62ajroCVY7br6OY1tJkbEAP17lsK4sQM="
+      "Application.1ewgv9k28k.pdb": "sha256-+QqIxKIgpPNmr+AObkVLNJxngBfIITuT9+u3qaWWgsA=",
+      "Domain.uxgnr6s99v.pdb": "sha256-gohvi0g3VJFwQHknoSf0kMRCL2KSFb0oIr3Cb/VjwWQ=",
+      "CRM_SAAS.v6f1ayxm25.pdb": "sha256-J6XL5eELapohMK4yxX4t+qo8InR3TFkOQM5E7EGVq0E="
     }
   },
   "cacheBootResources": true,

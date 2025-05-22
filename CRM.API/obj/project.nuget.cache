@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "ml5MfYwKlxo=",
+  "dgSpecHash": "5qGPzhCglOA=",
   "success": true,
   "projectFilePath": "C:\\Users\\dev2\\RiderProjects\\saas\\CRM.API\\CRM.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dev2\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\blazored.localstorage\\4.5.0\\blazored.localstorage.4.5.0.nupkg.sha512",
+    "C:\\Users\\dev2\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
+    "C:\\Users\\dev2\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\dev2\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.0.0\\fluentvalidation.dependencyinjectionextensions.12.0.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\labradoratory.aspnetcore.jsonpatch.patchable\\2.0.0\\labradoratory.aspnetcore.jsonpatch.patchable.2.0.0.nupkg.sha512",
     "C:\\Users\\dev2\\.nuget\\packages\\labradoratory.fetch\\2.0.1\\labradoratory.fetch.2.0.1.nupkg.sha512",

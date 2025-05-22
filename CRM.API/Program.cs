@@ -1,6 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddFluentValidator();
 builder.Services.AddDbContext(builder.Configuration);
 builder.Services.AddSignalRDependency();
 builder.Services.AddControllers()
